@@ -1,0 +1,2057 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DATA SUAS LEGISLAÇÃO</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0d1117; --ink2:#1c2129; --ink3:#2d3748;
+  --muted:#6b7280; --subtle:#9ca3af; --border:#e5e7eb; --bg:#f9fafb; --surface:#fff;
+  --green:#065f46; --green2:#059669; --green3:#10b981; --green4:#d1fae5; --green5:#ecfdf5;
+  --amber:#92400e; --amber2:#d97706; --amber3:#fef3c7;
+  --blue:#1e40af; --blue2:#3b82f6; --blue3:#dbeafe;
+  --violet:#4c1d95; --violet2:#7c3aed; --violet3:#ede9fe;
+  --rose:#881337; --rose2:#e11d48; --rose3:#fee2e2;
+  --orange:#7c2d12; --orange2:#ea580c; --orange3:#ffedd5;
+  --slate:#334155; --slate2:#64748b; --slate3:#f1f5f9;
+  --font-h:'Playfair Display',serif;
+  --font-b:'Plus Jakarta Sans',sans-serif;
+  --font-m:'JetBrains Mono',monospace;
+  --r:10px; --r2:16px; --r3:24px;
+  --sh:0 1px 3px rgba(0,0,0,.06),0 4px 16px rgba(0,0,0,.06);
+  --sh2:0 8px 32px rgba(0,0,0,.12);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--bg);color:var(--ink);min-height:100vh}
+
+/* ─── TOPBAR ─── */
+.topbar{
+  background:var(--ink);
+  padding:0 32px;
+  display:flex;align-items:center;gap:16px;
+  height:52px;position:sticky;top:0;z-index:200;
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.topbar-brand{display:flex;align-items:center;gap:10px}
+.tb-logo{
+  width:34px;height:34px;border-radius:8px;
+  background:linear-gradient(135deg,var(--green2),var(--green3));
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;flex-shrink:0;
+}
+.tb-name{font-family:var(--font-h);font-size:1rem;color:#fff;letter-spacing:.01em}
+.tb-sub{font-family:var(--font-m);font-size:.58rem;color:rgba(255,255,255,.4);letter-spacing:.08em;text-transform:uppercase;margin-top:1px}
+.topbar-search{
+  margin-left:auto;position:relative;
+  width:clamp(180px,28vw,340px);
+}
+.topbar-search input{
+  width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);
+  border-radius:8px;padding:7px 12px 7px 34px;
+  color:#fff;font-family:var(--font-m);font-size:.78rem;outline:none;
+  transition:background .2s,border-color .2s;
+}
+.topbar-search input::placeholder{color:rgba(255,255,255,.35)}
+.topbar-search input:focus{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.3)}
+.ts-icon{position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:13px;color:rgba(255,255,255,.4)}
+.topbar-stats{display:flex;gap:6px;margin-left:12px}
+.tb-stat{
+  font-family:var(--font-m);font-size:.65rem;color:rgba(255,255,255,.55);
+  background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);
+  border-radius:20px;padding:4px 10px;white-space:nowrap;
+}
+.tb-stat strong{color:var(--green3);font-weight:600}
+
+/* ─── HERO ─── */
+.hero{
+  background:linear-gradient(160deg,var(--ink2) 0%,var(--green) 100%);
+  padding:48px 32px 40px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-80px;right:-100px;
+  width:480px;height:480px;
+  background:radial-gradient(circle,rgba(5,150,105,.2),transparent 65%);
+  border-radius:50%;pointer-events:none;
+}
+.hero-inner{max-width:1400px;margin:0 auto;display:flex;align-items:flex-end;gap:32px;flex-wrap:wrap}
+.hero-text h1{
+  font-family:var(--font-h);font-size:clamp(1.6rem,3vw,2.6rem);
+  color:#fff;line-height:1.1;margin-bottom:8px;
+  text-shadow:0 2px 12px rgba(0,0,0,.3);
+}
+.hero-text p{color:rgba(255,255,255,.6);font-size:.9rem;line-height:1.5;max-width:520px}
+.hero-pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.hero-pill{
+  font-family:var(--font-m);font-size:.62rem;padding:4px 12px;border-radius:20px;
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);color:rgba(255,255,255,.8);
+  letter-spacing:.05em;text-transform:uppercase;white-space:nowrap;
+}
+
+/* ─── NAV TABS ─── */
+.navtabs{
+  background:var(--surface);border-bottom:2px solid var(--border);
+  display:flex;padding:0 32px;gap:0;
+  position:sticky;top:52px;z-index:100;
+  overflow-x:auto;scrollbar-width:none;
+}
+.navtabs::-webkit-scrollbar{display:none}
+.navtab{
+  flex-shrink:0;padding:14px 20px;font-size:.82rem;font-weight:600;
+  color:var(--muted);cursor:pointer;border-bottom:2.5px solid transparent;
+  margin-bottom:-2px;transition:color .2s,border-color .2s;user-select:none;
+  white-space:nowrap;display:flex;align-items:center;gap:6px;
+}
+.navtab:hover{color:var(--ink)}
+.navtab.on{color:var(--green);border-bottom-color:var(--green)}
+.navtab .ni{font-size:15px}
+
+/* ─── LAYOUT ─── */
+.layout{max-width:1400px;margin:0 auto;padding:24px 32px 60px;display:grid;grid-template-columns:240px 1fr;gap:24px}
+
+/* ─── SIDEBAR ─── */
+.sidebar{
+  position:sticky;top:calc(52px + 48px);
+  height:calc(100vh - 108px);
+  overflow-y:auto;scrollbar-width:thin;scrollbar-color:#d1d5db transparent;
+  display:flex;flex-direction:column;gap:8px;padding-right:4px;
+}
+.sb-section{background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);overflow:hidden}
+.sb-title{
+  font-family:var(--font-m);font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;
+  color:var(--subtle);padding:10px 14px 8px;border-bottom:1px solid var(--border);
+  background:var(--slate3);
+}
+.sb-btn{
+  display:flex;align-items:center;gap:8px;width:100%;padding:8px 14px;
+  background:none;border:none;cursor:pointer;text-align:left;
+  font-family:var(--font-b);font-size:.8rem;color:var(--ink3);
+  transition:background .15s;border-bottom:1px solid rgba(229,231,235,.5);
+}
+.sb-btn:last-child{border-bottom:none}
+.sb-btn:hover{background:var(--bg)}
+.sb-btn.on{background:var(--green4);color:var(--green);font-weight:600}
+.sb-btn .sb-ic{font-size:14px;width:20px;text-align:center;flex-shrink:0}
+.sb-btn .sb-lbl{flex:1;line-height:1.25;font-size:.78rem}
+.sb-btn .sb-cnt{
+  font-family:var(--font-m);font-size:.62rem;background:rgba(0,0,0,.05);
+  border-radius:20px;padding:1px 6px;color:var(--muted);flex-shrink:0;
+}
+.sb-btn.on .sb-cnt{background:var(--green2);color:#fff}
+
+/* ─── MAIN ─── */
+.main{}
+.panel{display:none}.panel.on{display:block}
+
+/* ─── TOOLBAR ─── */
+.toolbar{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.tool-label{font-family:var(--font-m);font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;flex:1}
+.tool-chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{
+  font-family:var(--font-m);font-size:.68rem;padding:5px 12px;border-radius:20px;
+  border:1.5px solid var(--border);background:var(--surface);color:var(--muted);
+  cursor:pointer;transition:all .15s;user-select:none;white-space:nowrap;
+}
+.chip:hover{border-color:var(--green2);color:var(--green)}
+.chip.on{background:var(--green);border-color:var(--green);color:#fff}
+.chip.rev{background:var(--rose3);border-color:var(--rose2);color:var(--rose)}
+.chip.rev.on{background:var(--rose2);border-color:var(--rose2);color:#fff}
+.sort-sel{
+  font-family:var(--font-m);font-size:.72rem;border:1px solid var(--border);
+  border-radius:8px;padding:5px 10px;background:var(--surface);color:var(--ink);
+  cursor:pointer;outline:none;
+}
+.active-filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.af-pill{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:var(--font-m);font-size:.65rem;
+  background:var(--green4);color:var(--green);border-radius:20px;padding:3px 8px;
+}
+.af-pill button{background:none;border:none;cursor:pointer;color:var(--green);font-size:11px;padding:0;line-height:1}
+.af-pill.rev{background:var(--rose3);color:var(--rose)}
+.af-pill.rev button{color:var(--rose2)}
+
+/* ─── CARDS GRID ─── */
+.cards{display:flex;flex-direction:column;gap:8px}
+
+/* ─── CARD ─── */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--r2);border-left:4px solid transparent;
+  padding:14px 18px;cursor:pointer;
+  transition:box-shadow .2s,transform .15s;
+  animation:fadeUp .25s ease both;
+  position:relative;
+}
+.card:hover{box-shadow:var(--sh2);transform:translateY(-1px)}
+.card.revogada{opacity:.75;border-left-style:dashed!important}
+.card.revogada::after{
+  content:'REVOGADA';position:absolute;top:10px;right:12px;
+  font-family:var(--font-m);font-size:.55rem;letter-spacing:.08em;
+  background:var(--rose3);color:var(--rose2);border-radius:4px;padding:2px 6px;
+  font-weight:700;
+}
+.card.novo::before{
+  content:'NOVO';position:absolute;top:10px;right:12px;
+  font-family:var(--font-m);font-size:.55rem;letter-spacing:.08em;
+  background:#dcfce7;color:#15803d;border-radius:4px;padding:2px 6px;font-weight:700;
+}
+.card.revogada.novo::before{display:none}
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.card-top{display:flex;align-items:flex-start;gap:12px;margin-bottom:6px}
+.card-badges{display:flex;gap:5px;flex-wrap:wrap;flex-shrink:0;max-width:280px}
+.bdg{font-family:var(--font-m);font-size:.6rem;padding:2px 7px;border-radius:5px;font-weight:700;letter-spacing:.03em;white-space:nowrap}
+.card-meta{font-family:var(--font-m);font-size:.65rem;color:var(--subtle);margin-bottom:3px}
+.card-num{font-family:var(--font-h);font-size:.95rem;font-weight:700;color:var(--ink);margin-bottom:3px;line-height:1.25}
+.card-tit{font-size:.82rem;color:var(--muted);line-height:1.4;font-style:italic}
+.card-em{font-size:.78rem;color:var(--ink3);line-height:1.5;margin-top:7px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:10px;padding-top:8px;border-top:1px solid var(--border)}
+.card-tags{display:flex;gap:3px;flex-wrap:wrap;flex:1}
+.tag{font-family:var(--font-m);font-size:.58rem;background:var(--bg);border:1px solid var(--border);border-radius:4px;padding:2px 6px;color:var(--subtle)}
+.card-link{
+  font-family:var(--font-m);font-size:.65rem;color:var(--green2);text-decoration:none;
+  flex-shrink:0;margin-left:10px;padding:3px 9px;border:1px solid var(--green2);
+  border-radius:6px;transition:background .15s,color .15s;
+}
+.card-link:hover{background:var(--green2);color:#fff}
+.revogada-info{
+  font-family:var(--font-m);font-size:.68rem;background:var(--rose3);
+  color:var(--rose);border-radius:6px;padding:5px 10px;margin-top:8px;
+  display:flex;align-items:center;gap:6px;
+}
+.revogada-info::before{content:'⚠️';font-size:11px}
+
+/* ─── MODAL ─── */
+.overlay{
+  display:none;position:fixed;inset:0;
+  background:rgba(13,17,23,.6);backdrop-filter:blur(6px);
+  z-index:500;align-items:center;justify-content:center;padding:20px;
+}
+.overlay.open{display:flex}
+.modal{
+  background:var(--surface);border-radius:var(--r3);
+  width:100%;max-width:700px;max-height:90vh;overflow-y:auto;
+  box-shadow:0 24px 80px rgba(0,0,0,.3);
+}
+.modal-hdr{
+  padding:24px 24px 16px;border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:var(--surface);z-index:1;
+}
+.modal-badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.modal-num{font-family:var(--font-h);font-size:1.25rem;font-weight:700;line-height:1.2;margin-bottom:4px}
+.modal-tit{font-size:.9rem;color:var(--muted);font-style:italic;line-height:1.4}
+.modal-close{
+  position:absolute;top:14px;right:14px;
+  background:var(--bg);border:1px solid var(--border);border-radius:8px;
+  width:30px;height:30px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;font-size:14px;color:var(--muted);transition:background .15s;
+}
+.modal-close:hover{background:var(--border)}
+.modal-body{padding:20px 24px}
+.msec{margin-bottom:18px}
+.msec-title{font-family:var(--font-m);font-size:.62rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:8px;padding-bottom:5px;border-bottom:1px solid var(--border)}
+.msec-text{font-size:.85rem;line-height:1.65;color:var(--ink3)}
+.msec-disp{font-family:var(--font-m);font-size:.74rem;line-height:1.8;color:var(--ink);background:var(--bg);border-radius:8px;padding:12px 14px;white-space:pre-wrap}
+.msec-tags{display:flex;flex-wrap:wrap;gap:5px}
+.modal-ftr{padding:14px 24px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:8px}
+.btn-p{
+  font-family:var(--font-m);font-size:.76rem;background:var(--green2);color:#fff;
+  border:none;border-radius:8px;padding:8px 16px;cursor:pointer;text-decoration:none;
+  transition:background .15s;display:inline-flex;align-items:center;gap:5px;
+}
+.btn-p:hover{background:var(--green)}
+.btn-g{
+  font-family:var(--font-m);font-size:.76rem;background:transparent;color:var(--muted);
+  border:1px solid var(--border);border-radius:8px;padding:8px 16px;cursor:pointer;transition:background .15s;
+}
+.btn-g:hover{background:var(--bg)}
+.modal-revogada{
+  background:var(--rose3);border:1px solid #fca5a5;border-radius:8px;
+  padding:10px 14px;margin-bottom:16px;font-size:.82rem;color:var(--rose);
+  line-height:1.5;
+}
+.modal-revogada strong{font-weight:700}
+
+/* ─── FNAS LIBRARY PANEL ─── */
+.fnas-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fnas-section-title{
+  font-family:var(--font-h);font-size:1.1rem;color:var(--ink);
+  margin:24px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--green4);
+  display:flex;align-items:center;gap:10px;
+}
+.fnas-section-title:first-child{margin-top:0}
+.fnas-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);
+  padding:14px;display:flex;flex-direction:column;gap:8px;
+  transition:box-shadow .2s,transform .15s;cursor:pointer;
+  text-decoration:none;
+}
+.fnas-card:hover{box-shadow:var(--sh2);transform:translateY(-2px)}
+.fnas-card-icon{font-size:28px;margin-bottom:4px}
+.fnas-card-type{font-family:var(--font-m);font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:var(--subtle)}
+.fnas-card-title{font-size:.84rem;font-weight:600;color:var(--ink);line-height:1.4;flex:1}
+.fnas-card-desc{font-size:.76rem;color:var(--muted);line-height:1.45}
+.fnas-card-link{
+  font-family:var(--font-m);font-size:.65rem;color:var(--green2);
+  display:inline-flex;align-items:center;gap:4px;margin-top:auto;
+}
+.fnas-card-link:hover{text-decoration:underline}
+.fnas-card.destaque{border-color:var(--green3);border-width:2px}
+
+/* ─── ORGAO / TEMA PANELS ─── */
+.panel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.panel-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:var(--r2);
+  padding:16px;cursor:pointer;transition:box-shadow .2s,transform .15s;
+  border-top:3px solid transparent;text-align:left;
+}
+.panel-card:hover{box-shadow:var(--sh2);transform:translateY(-2px)}
+.pc-icon{font-size:28px;margin-bottom:8px;display:block}
+.pc-name{font-family:var(--font-h);font-size:1rem;font-weight:700;color:var(--ink);margin-bottom:2px}
+.pc-full{font-size:.76rem;color:var(--muted);line-height:1.35;margin-bottom:10px}
+.pc-cnt{font-family:var(--font-m);font-size:.68rem;padding:3px 10px;border-radius:20px;display:inline-block}
+
+/* ─── EMPTY ─── */
+.empty{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-icon{font-size:48px;margin-bottom:16px}
+.empty-title{font-family:var(--font-h);font-size:1.1rem;color:var(--ink);margin-bottom:8px}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:960px){
+  .layout{grid-template-columns:1fr;padding:16px}
+  .sidebar{position:static;height:auto;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .topbar{padding:0 16px}
+  .hero{padding:32px 16px 28px}
+  .navtabs{padding:0 16px}
+}
+@media(max-width:600px){
+  .sidebar{grid-template-columns:1fr}
+  .topbar-stats{display:none}
+  .fnas-grid{grid-template-columns:1fr}
+  .panel-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="topbar-brand">
+    <div class="tb-logo">⚖️</div>
+    <div><div class="tb-name">DATA SUAS LEGISLAÇÃO</div><div class="tb-sub">Base de dados · Assistência Social</div></div>
+  </div>
+  <div class="topbar-search">
+    <span class="ts-icon">🔍</span>
+    <input id="searchInput" type="text" placeholder="Buscar norma, palavra-chave..." autocomplete="off">
+  </div>
+  <div class="topbar-stats">
+    <div class="tb-stat"><strong id="stTotal">—</strong> normas</div>
+    <div class="tb-stat"><strong id="stNovo">—</strong> novidades</div>
+    <div class="tb-stat"><strong id="stRev">—</strong> revogadas</div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Base Normativa<br>do SUAS</h1>
+      <p>Legislação federal, estadual (Ceará), portarias, resoluções, instruções normativas e materiais técnicos do FNAS — tudo em um só lugar, atualizado até março/2026.</p>
+      <div class="hero-pills">
+        <span class="hero-pill">LOAS · PNAS · NOB-SUAS</span>
+        <span class="hero-pill">Portarias 2024–2026</span>
+        <span class="hero-pill">INs IGD · CadÚnico</span>
+        <span class="hero-pill">SPS-CE · CEAS-CE</span>
+        <span class="hero-pill">Biblioteca FNAS</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="navtabs" id="navtabs">
+  <div class="navtab on" data-t="todos"><span class="ni">📋</span>Todas as Normas</div>
+  <div class="navtab" data-t="orgao"><span class="ni">🏛️</span>Por Órgão</div>
+  <div class="navtab" data-t="tema"><span class="ni">📂</span>Por Tema</div>
+  <div class="navtab" data-t="ceara"><span class="ni">🌵</span>Legislação Ceará</div>
+  <div class="navtab" data-t="fnas"><span class="ni">📚</span>Biblioteca FNAS</div>
+</nav>
+
+<!-- LAYOUT -->
+<div class="layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebarEl">
+    <div class="sb-section">
+      <div class="sb-title">Órgão Emissor</div>
+      <button class="sb-btn on" data-f="orgao" data-v="" onclick="setF('orgao','',this)">
+        <span class="sb-ic">🗂️</span><span class="sb-lbl">Todos</span><span class="sb-cnt" id="sc-all">—</span>
+      </button>
+      <button class="sb-btn" data-f="orgao" data-v="lei" onclick="setF('orgao','lei',this)">
+        <span class="sb-ic">🏛️</span><span class="sb-lbl">Legislação Federal</span><span class="sb-cnt" id="sc-lei">—</span>
+      </button>
+      <button class="sb-btn" data-f="orgao" data-v="cnas" onclick="setF('orgao','cnas',this)">
+        <span class="sb-ic">⚖️</span><span class="sb-lbl">CNAS / CIT</span><span class="sb-cnt" id="sc-cnas">—</span>
+      </button>
+      <button class="sb-btn" data-f="orgao" data-v="mds" onclick="setF('orgao','mds',this)">
+        <span class="sb-ic">🏢</span><span class="sb-lbl">MDS / SNAS</span><span class="sb-cnt" id="sc-mds">—</span>
+      </button>
+      <button class="sb-btn" data-f="orgao" data-v="fnas" onclick="setF('orgao','fnas',this)">
+        <span class="sb-ic">💰</span><span class="sb-lbl">FNAS</span><span class="sb-cnt" id="sc-fnas">—</span>
+      </button>
+      <button class="sb-btn" data-f="orgao" data-v="spsce" onclick="setF('orgao','spsce',this)">
+        <span class="sb-ic">🌵</span><span class="sb-lbl">SPS-CE / CEAS-CE</span><span class="sb-cnt" id="sc-spsce">—</span>
+      </button>
+    </div>
+    <div class="sb-section" id="sbTema">
+      <div class="sb-title">Tema</div>
+    </div>
+    <div class="sb-section">
+      <div class="sb-title">Status</div>
+      <button class="sb-btn" data-f="status" data-v="vigente" onclick="setF('status','vigente',this)">
+        <span class="sb-ic">✅</span><span class="sb-lbl">Vigentes</span><span class="sb-cnt" id="sc-vig">—</span>
+      </button>
+      <button class="sb-btn" data-f="status" data-v="revogada" onclick="setF('status','revogada',this)">
+        <span class="sb-ic">🚫</span><span class="sb-lbl">Revogadas</span><span class="sb-cnt" id="sc-rev">—</span>
+      </button>
+      <button class="sb-btn" data-f="status" data-v="novo" onclick="setF('status','novo',this)">
+        <span class="sb-ic">🆕</span><span class="sb-lbl">Novidades (2025–26)</span><span class="sb-cnt" id="sc-nov">—</span>
+      </button>
+    </div>
+  </aside>
+
+  <!-- MAIN PANELS -->
+  <main>
+
+    <!-- PAINEL TODOS -->
+    <div class="panel on" id="panel-todos">
+      <div class="toolbar">
+        <span class="tool-label" id="resultLabel">Carregando...</span>
+        <select class="sort-sel" id="sortSel" onchange="render()">
+          <option value="ano-desc">Mais recente</option>
+          <option value="ano-asc">Mais antigo</option>
+          <option value="alfa">A–Z</option>
+        </select>
+      </div>
+      <div id="activeFilters" class="active-filters"></div>
+      <div class="cards" id="cardList"></div>
+    </div>
+
+    <!-- PAINEL ORGAO -->
+    <div class="panel" id="panel-orgao">
+      <div class="panel-grid" id="orgGrid"></div>
+    </div>
+
+    <!-- PAINEL TEMA -->
+    <div class="panel" id="panel-tema">
+      <div class="panel-grid" id="temaGrid"></div>
+    </div>
+
+    <!-- PAINEL CEARÁ -->
+    <div class="panel" id="panel-ceara">
+      <div class="toolbar">
+        <span class="tool-label" id="ceLabel">Legislação Estadual — Ceará</span>
+        <select class="sort-sel" id="ceSortSel" onchange="renderCeara()">
+          <option value="ano-desc">Mais recente</option>
+          <option value="ano-asc">Mais antigo</option>
+        </select>
+      </div>
+      <div class="cards" id="ceList"></div>
+    </div>
+
+    <!-- PAINEL FNAS BIBLIOTECA -->
+    <div class="panel" id="panel-fnas">
+      <div id="fnasContent"></div>
+    </div>
+
+  </main>
+</div>
+
+<!-- MODAL -->
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <div class="modal-hdr">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <div class="modal-badges" id="mBdg"></div>
+      <div class="modal-num" id="mNum"></div>
+      <div class="modal-tit" id="mTit"></div>
+    </div>
+    <div class="modal-body">
+      <div id="mRevInfo"></div>
+      <div class="msec"><div class="msec-title">Ementa</div><p class="msec-text" id="mEm"></p></div>
+      <div class="msec"><div class="msec-title">Principais Disposições</div><div class="msec-disp" id="mDi"></div></div>
+      <div class="msec"><div class="msec-title">Palavras-chave</div><div class="msec-tags" id="mTags"></div></div>
+    </div>
+    <div class="modal-ftr">
+      <button class="btn-g" onclick="closeModal()">Fechar</button>
+      <a class="btn-p" id="mLink" href="#" target="_blank" rel="noopener">🔗 Documento Oficial</a>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// DADOS — TEMAS
+// ═══════════════════════════════════════════════
+const TEMAS=[
+  {id:'legislacao-base',     nome:'Legislação Base',              icon:'📜',bg:'#d1fae5',cor:'#065f46'},
+  {id:'protecao-basica',     nome:'Proteção Social Básica',       icon:'🏠',bg:'#dbeafe',cor:'#1e40af'},
+  {id:'protecao-especial',   nome:'Proteção Social Especial',     icon:'🛡️',bg:'#fce7f3',cor:'#9d174d'},
+  {id:'gestao-financiamento',nome:'Gestão e Financiamento',       icon:'💼',bg:'#fef3c7',cor:'#92400e'},
+  {id:'servicos',            nome:'Serviços Socioassistenciais',  icon:'🤝',bg:'#ede9fe',cor:'#4c1d95'},
+  {id:'controle-social',     nome:'Controle Social',              icon:'⚖️',bg:'#fee2e2',cor:'#881337'},
+  {id:'entidades',           nome:'Entidades e Organizações',     icon:'🏢',bg:'#e0f2fe',cor:'#0c4a6e'},
+  {id:'cuidados',            nome:'Política de Cuidados',         icon:'🤲',bg:'#fef9c3',cor:'#854d0e'},
+  {id:'legislacao-ceara',    nome:'Legislação Estadual — Ceará',  icon:'🌵',bg:'#ffedd5',cor:'#7c2d12'},
+];
+
+// ═══════════════════════════════════════════════
+// DADOS — ÓRGÃOS
+// ═══════════════════════════════════════════════
+const ORGAOS={
+  lei:   {nome:'Legislação Federal', cor:'#059669',bg:'#d1fae5',borda:'#059669',icon:'🏛️',lbl:'normas'},
+  cnas:  {nome:'CNAS / CIT',         cor:'#1e40af',bg:'#dbeafe',borda:'#3b82f6',icon:'⚖️',lbl:'resoluções'},
+  mds:   {nome:'MDS / SNAS',         cor:'#4c1d95',bg:'#ede9fe',borda:'#7c3aed',icon:'🏢',lbl:'portarias e INs'},
+  fnas:  {nome:'FNAS',               cor:'#92400e',bg:'#fef3c7',borda:'#d97706',icon:'💰',lbl:'resoluções'},
+  spsce: {nome:'SPS-CE / CEAS-CE',   cor:'#7c2d12',bg:'#ffedd5',borda:'#ea580c',icon:'🌵',lbl:'normas estaduais'},
+};
+const BC={lei:'bl',cnas:'bc',mds:'bm',fnas:'bf',spsce:'bo'};
+
+// ═══════════════════════════════════════════════
+// DADOS — LEGISLAÇÃO FEDERAL + CNAS + MDS + FNAS
+// ═══════════════════════════════════════════════
+const LEG=[
+// ──── LEIS FEDERAIS ────
+{id:1,o:'lei',tipo:'Lei Federal',ano:1988,n:false,rev:false,
+num:'CF/1988 — Arts. 203 e 204',tit:'Base Constitucional da Assistência Social',
+ementa:'Os arts. 203 e 204 estabelecem a Assistência Social como direito do cidadão e dever do Estado, integrante da Seguridade Social, de caráter não contributivo.',
+disp:`• Art. 203: proteção à família, maternidade, infância, adolescência e velhice; amparo a carentes; habilitação de PcD; BPC; integração ao mercado de trabalho
+• Art. 204: descentralização político-administrativa; participação popular por organizações representativas
+• Integra a Seguridade Social (art. 194) junto à Saúde e Previdência Social`,
+tags:['CF/1988','Constituição','Seguridade Social','BPC','Descentralização'],
+link:'https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm',tema:'legislacao-base'},
+
+{id:2,o:'lei',tipo:'Lei Federal',ano:1993,n:false,rev:false,
+num:'Lei nº 8.742/1993 (LOAS)',tit:'Lei Orgânica da Assistência Social',
+ementa:'Marco legal que define a Assistência Social como política pública, direito do cidadão e dever do Estado, de caráter não contributivo.',
+disp:`• Define princípios da AS: supremacia do atendimento, universalização, respeito à dignidade, igualdade de direitos
+• Institui o SUAS, o BPC e os Benefícios Eventuais
+• Organiza serviços, programas e projetos socioassistenciais
+• Regulamenta o controle social: CNAS, conselhos estaduais e municipais
+• Define o cofinanciamento entre os entes federados`,
+tags:['LOAS','BPC','SUAS','Benefícios','Controle Social','Financiamento'],
+link:'https://www.planalto.gov.br/ccivil_03/leis/l8742compilado.htm',tema:'legislacao-base'},
+
+{id:3,o:'lei',tipo:'Lei Federal',ano:2011,n:false,rev:false,
+num:'Lei nº 12.435/2011',tit:'Consolidação do SUAS na LOAS',
+ementa:'Altera a LOAS para incorporar formalmente o SUAS, definindo níveis de atenção, entidades, financiamento e gestão descentralizada.',
+disp:`• Consolida o SUAS na LOAS com definição legal dos níveis de proteção
+• Define Proteção Social Básica e Especial (média e alta complexidade)
+• Regulamenta entidades sem fins lucrativos no SUAS
+• Inclui a Vigilância Socioassistencial como função estratégica`,
+tags:['SUAS','LOAS','Proteção Básica','Proteção Especial','Vigilância Socioassistencial'],
+link:'https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2011/lei/l12435.htm',tema:'legislacao-base'},
+
+{id:4,o:'lei',tipo:'Lei Federal',ano:1990,n:false,rev:false,
+num:'Lei nº 8.069/1990 (ECA)',tit:'Estatuto da Criança e do Adolescente',
+ementa:'Dispõe sobre o Estatuto da Criança e do Adolescente, regulamentando direitos e proteção integral.',
+disp:`• Define medidas protetivas para crianças e adolescentes em risco
+• Regula acolhimento institucional e familiar
+• Trata do Conselho Tutelar e suas atribuições
+• Fundamenta a atuação do SUAS na proteção integral à infância`,
+tags:['ECA','Criança','Adolescente','Proteção Integral','Conselho Tutelar','Acolhimento'],
+link:'https://www.planalto.gov.br/ccivil_03/leis/l8069.htm',tema:'legislacao-base'},
+
+{id:5,o:'lei',tipo:'Lei Federal',ano:2003,n:false,rev:false,
+num:'Lei nº 10.741/2003',tit:'Estatuto do Idoso',
+ementa:'Regula os direitos assegurados às pessoas com 60 anos ou mais.',
+disp:`• Garante o BPC ao idoso com renda per capita ≤ 1/4 do SM
+• Regulamenta serviços de assistência social ao idoso (CRAS, CREAS, ILPIs)
+• Trata do acolhimento institucional (ILPIs)
+• Proíbe discriminação e violência contra o idoso`,
+tags:['Idoso','Estatuto','BPC','ILPI','Direitos','Proteção Social'],
+link:'https://www.planalto.gov.br/ccivil_03/leis/2003/l10.741.htm',tema:'legislacao-base'},
+
+{id:6,o:'lei',tipo:'Lei Federal',ano:2015,n:false,rev:false,
+num:'Lei nº 13.146/2015 (LBI)',tit:'Lei Brasileira de Inclusão — Estatuto da PcD',
+ementa:'Institui a LBI, assegurando condições de igualdade para a pessoa com deficiência.',
+disp:`• Garante o BPC à PcD com base no modelo biopsicossocial (CIF)
+• Regulamenta serviços assistenciais específicos para PcD no SUAS
+• Trata das Residências Inclusivas no SUAS
+• Define acessibilidade como requisito obrigatório em todos os serviços`,
+tags:['LBI','Deficiência','PcD','BPC','Inclusão','Residência Inclusiva'],
+link:'https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13146.htm',tema:'legislacao-base'},
+
+{id:7,o:'lei',tipo:'Lei Federal',ano:1993,n:false,rev:false,
+num:'Lei nº 8.662/1993',tit:'Regulamentação da Profissão de Assistente Social',
+ementa:'Dispõe sobre a profissão de Assistente Social, regulamentando o exercício e as competências privativas relevantes para o SUAS.',
+disp:`• Define competências privativas do assistente social no SUAS
+• Regulamenta atribuições: coordenação do PAIF, PAEFI e serviços de alta complexidade
+• Fundamenta a composição das equipes de referência do SUAS
+• Cria o Sistema CFESS/CRESS`,
+tags:['Assistente Social','CFESS','CRESS','Profissão','Equipe SUAS'],
+link:'https://www.planalto.gov.br/ccivil_03/leis/l8662.htm',tema:'legislacao-base'},
+
+{id:8,o:'lei',tipo:'Lei Federal',ano:2004,n:false,rev:false,
+num:'Lei nº 10.836/2004',tit:'Programa Bolsa Família (versão original)',
+ementa:'Criou o Programa Bolsa Família, unificando programas anteriores de transferência de renda.',
+disp:`• Unificou Bolsa Escola, Bolsa Alimentação, Auxílio Gás e Cartão Alimentação
+• Definiu critérios de elegibilidade por renda per capita
+• Estabeleceu condicionalidades de saúde e educação
+• Criou o Cadastro Único para Programas Sociais`,
+tags:['Bolsa Família','Transferência de Renda','CadÚnico','Condicionalidades'],
+link:'https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2004/lei/l10.836.htm',tema:'protecao-basica'},
+
+{id:9,o:'lei',tipo:'Lei Federal',ano:2023,n:false,rev:false,
+num:'Lei nº 14.601/2023',tit:'Novo Programa Bolsa Família',
+ementa:'Institui o novo Programa Bolsa Família, com benefício mínimo de R$ 600, complementos e critérios de inclusão produtiva.',
+disp:`• Define benefício básico de R$ 600,00 por família
+• Cria Complemento Familiar, Complemento Primeira Infância e BVA
+• Estabelece Regra de Proteção para saída gradual do programa
+• Fundamenta o Decreto nº 12.064/2024`,
+tags:['Bolsa Família','Transferência de Renda','Vulnerabilidade','Primeira Infância','CadÚnico'],
+link:'https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2023/lei/L14601.htm',tema:'protecao-basica'},
+
+{id:10,o:'lei',tipo:'Lei Federal',ano:2009,n:false,rev:false,
+num:'Lei nº 12.101/2009',tit:'Certificação de Entidades Beneficentes — CEBAS',
+ementa:'Dispõe sobre a certificação das entidades beneficentes de assistência social e regula isenções de contribuições.',
+disp:`• Define critérios para concessão do CEBAS nas áreas de saúde, educação e assistência social
+• Regulamenta isenção de contribuições previdenciárias para entidades beneficentes
+• Estabelece critérios de prestação de contas e transparência`,
+tags:['CEBAS','Entidades','Filantropia','Isenção','Gratuidade'],
+link:'https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2009/lei/l12101.htm',tema:'entidades'},
+
+{id:11,o:'lei',tipo:'Lei Federal',ano:2014,n:false,rev:false,
+num:'Lei nº 13.019/2014 (MROSC)',tit:'Marco Regulatório das OSC',
+ementa:'Estabelece o regime jurídico das parcerias entre a administração pública e as organizações da sociedade civil.',
+disp:`• Cria Termo de Colaboração (poder público), Termo de Fomento (OSC) e Acordo de Cooperação
+• Define chamamento público para seleção de OSCs
+• Regulamenta prestação de contas por resultados
+• Aplica-se a todas as entidades parceiras do SUAS`,
+tags:['MROSC','OSC','Parceria','Termo de Colaboração','Chamamento Público'],
+link:'https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2014/lei/l13019.htm',tema:'entidades'},
+
+{id:12,o:'lei',tipo:'Lei Federal',ano:2006,n:false,rev:false,
+num:'Lei nº 11.340/2006',tit:'Lei Maria da Penha — Interface com o SUAS',
+ementa:'Cria mecanismos para coibir a violência doméstica e familiar, com interface direta com os serviços de Proteção Social Especial do SUAS.',
+disp:`• Fundamenta a atuação do CREAS no atendimento a mulheres em situação de violência
+• Define o atendimento multidisciplinar (assistente social, psicólogo)
+• Exige articulação com a rede de saúde, educação e assistência social`,
+tags:['Maria da Penha','Violência','Mulher','CREAS','Proteção Especial'],
+link:'https://www.planalto.gov.br/ccivil_03/_ato2004-2006/2006/lei/l11340.htm',tema:'protecao-especial'},
+
+{id:13,o:'lei',tipo:'Lei Federal',ano:2012,n:false,rev:false,
+num:'Lei nº 12.594/2012 (SINASE)',tit:'Sistema Nacional de Atendimento Socioeducativo',
+ementa:'Institui o SINASE e regulamenta a execução das medidas socioeducativas para adolescentes em conflito com a lei.',
+disp:`• Define as medidas socioeducativas em meio aberto (LA e PSC) e fechado
+• Regulamenta o CREAS como unidade de referência para LA e PSC
+• Exige PIA para cada adolescente
+• Articula com o ECA, Judiciário e Conselho Tutelar`,
+tags:['SINASE','Socioeducativo','LA','PSC','Adolescente','CREAS'],
+link:'https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2012/lei/l12594.htm',tema:'protecao-especial'},
+
+{id:14,o:'lei',tipo:'Lei Federal',ano:2013,n:false,rev:false,
+num:'Lei nº 12.852/2013',tit:'Estatuto da Juventude',
+ementa:'Institui o Estatuto da Juventude, dispondo sobre os direitos dos jovens de 15 a 29 anos e as diretrizes das políticas públicas.',
+disp:`• Garante direitos à profissionalização, trabalho, renda, educação, saúde, cultura, esporte e lazer
+• Interface com o SUAS na inclusão produtiva e serviços socioassistenciais para jovens
+• Fundamenta os serviços do SCFV para adolescentes e jovens`,
+tags:['Juventude','Estatuto','Jovens','Inclusão','SCFV'],
+link:'https://www.planalto.gov.br/ccivil_03/_ato2011-2014/2013/lei/l12852.htm',tema:'protecao-basica'},
+
+{id:15,o:'lei',tipo:'Lei Federal',ano:2016,n:false,rev:false,
+num:'Lei nº 13.257/2016',tit:'Marco Legal da Primeira Infância',
+ementa:'Estabelece princípios e diretrizes para políticas públicas na primeira infância (crianças até 6 anos).',
+disp:`• Define prioridade absoluta à criança na primeira infância
+• Fundamenta o Programa Criança Feliz no SUAS
+• Interface com o PAIF, Bolsa Família e políticas de saúde
+• Estabelece diretrizes para atendimento na educação infantil e assistência social`,
+tags:['Primeira Infância','Criança','Criança Feliz','PAIF','Desenvolvimento'],
+link:'https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2016/lei/l13257.htm',tema:'protecao-basica'},
+
+{id:16,o:'lei',tipo:'Lei Complementar',ano:2024,n:false,rev:false,
+num:'Lei Complementar nº 210/2024',tit:'Emendas Parlamentares e Ações Estruturantes',
+ementa:'Disciplina a execução de emendas parlamentares de bancada e de comissão, fundamentando as Portarias MDS nº 1.044 e 1.045/2024.',
+disp:`• Determina que o MDS publique critérios para execução de emendas de bancada e comissão
+• Base legal para a Portaria MDS nº 1.045/2024
+• Garante rastreabilidade e transparência no uso das emendas`,
+tags:['Emendas Parlamentares','Bancada','Comissão','Base Legal','Orçamento'],
+link:'https://www.planalto.gov.br',tema:'gestao-financiamento'},
+
+// ──── DECRETOS FEDERAIS ────
+{id:17,o:'lei',tipo:'Decreto Federal',ano:2007,n:false,rev:false,
+num:'Decreto nº 6.214/2007',tit:'Regulamento do BPC',
+ementa:'Regulamenta o Benefício de Prestação Continuada — BPC, dispondo sobre critérios, operacionalização e revisão.',
+disp:`• Define critérios de renda per capita (≤ 1/4 do SM) e condições para idoso (65+) e PcD
+• Regulamenta a avaliação biopsicossocial para PcD
+• Estabelece que a renda do outro beneficiário BPC na família não é computada
+• Atualizado pelas portarias conjuntas MDS/INSS, incluindo a nº 34/2025`,
+tags:['BPC','Decreto','Deficiência','Idoso','Renda','CadÚnico'],
+link:'https://www.planalto.gov.br/ccivil_03/_ato2007-2010/2007/decreto/d6214.htm',tema:'legislacao-base'},
+
+{id:18,o:'lei',tipo:'Decreto Federal',ano:2022,n:false,rev:false,
+num:'Decreto nº 11.016/2022',tit:'CadÚnico — Gestão e Operacionalização',
+ementa:'Regulamenta o Cadastro Único para Programas Sociais do Governo Federal.',
+disp:`• Define os responsáveis pela gestão do CadÚnico: União (MDS), estados e municípios
+• Regulamenta os dados coletados e as responsabilidades pela veracidade das informações
+• Estabelece o uso do CadÚnico como instrumento único de acesso aos programas sociais federais`,
+tags:['CadÚnico','Decreto','Gestão','Dados','Programas Sociais'],
+link:'https://www.planalto.gov.br/ccivil_03/_ato2019-2022/2022/decreto/D11016.htm',tema:'legislacao-base'},
+
+{id:19,o:'lei',tipo:'Decreto Federal',ano:2024,n:false,rev:false,
+num:'Decreto nº 12.064/2024',tit:'Regulamentação do Programa Bolsa Família',
+ementa:'Regulamenta a Lei nº 14.601/2023, dispondo sobre critérios, operacionalização e gestão do PBF.',
+disp:`• Define composição e cálculo dos benefícios do PBF
+• Regulamenta as condicionalidades de saúde e educação
+• Disciplina o IGD como instrumento de apoio à gestão descentralizada
+• Define regras de habilitação, suspensão e cancelamento de benefícios`,
+tags:['Bolsa Família','Decreto','Condicionalidades','IGD','Regra de Proteção'],
+link:'https://www.planalto.gov.br/ccivil_03/_ato2023-2026/2024/decreto/D12064.htm',tema:'protecao-basica'},
+
+// ──── RESOLUÇÕES CNAS ────
+{id:20,o:'cnas',tipo:'Resolução CNAS',ano:2004,n:false,rev:false,
+num:'Resolução CNAS nº 145/2004',tit:'Política Nacional de Assistência Social — PNAS/2004',
+ementa:'Aprova a PNAS, estabelecendo os princípios, diretrizes e a estrutura do SUAS.',
+disp:`• Define a matricialidade sociofamiliar como eixo estruturante do SUAS
+• Organiza o SUAS por níveis de proteção (básica, especial média e alta complexidade)
+• Introduz a Vigilância Socioassistencial como função estratégica
+• Estabelece a noção de território como base organizativa da política`,
+tags:['PNAS','SUAS','Política Nacional','Territorialidade','Família','Proteção Social'],
+link:'https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Normativas/PNAS2004.pdf',tema:'legislacao-base'},
+
+{id:21,o:'cnas',tipo:'Resolução CNAS',ano:2005,n:false,rev:false,
+num:'Resolução CNAS nº 130/2005',tit:'NOB/SUAS 2005',
+ementa:'Aprova a Norma Operacional Básica do SUAS, regulamentando níveis de gestão, financiamento e habilitação.',
+disp:`• Define níveis de gestão municipal: inicial, básica e plena
+• Regulamenta o cofinanciamento federal, estadual e municipal
+• Estabelece o Pacto de Aprimoramento do SUAS
+• Cria o Sistema Nacional de Informações do SUAS (Rede SUAS)
+• Regulamenta a CIT e CIB`,
+tags:['NOB SUAS','Gestão','Cofinanciamento','Habilitação','CIT','CIB'],
+link:'https://www.mds.gov.br/webarquivos/public/nob_suas.pdf',tema:'gestao-financiamento'},
+
+{id:22,o:'cnas',tipo:'Resolução CNAS',ano:2006,n:false,rev:false,
+num:'Resolução CNAS nº 269/2006',tit:'NOB-RH/SUAS',
+ementa:'Aprova a Norma Operacional Básica de Recursos Humanos do SUAS.',
+disp:`• Define equipes de referência mínimas por porte e tipo de serviço
+• Veda expressamente a terceirização de cargos essenciais do SUAS
+• Estabelece diretrizes para capacitação e educação permanente
+• Define princípios éticos para os trabalhadores do SUAS`,
+tags:['NOB-RH','Recursos Humanos','Equipe de Referência','Trabalhadores','Capacitação'],
+link:'https://www.mds.gov.br/webarquivos/arquivo/assistencia_social/nob_rh.pdf',tema:'gestao-financiamento'},
+
+{id:23,o:'cnas',tipo:'Resolução CNAS',ano:2009,n:false,rev:false,
+num:'Resolução CNAS nº 109/2009',tit:'Tipificação Nacional de Serviços Socioassistenciais',
+ementa:'Padroniza todos os serviços da proteção básica e especial em âmbito nacional.',
+disp:`PROTEÇÃO SOCIAL BÁSICA: PAIF (CRAS), SCFV (por ciclos de vida), Proteção Domiciliar (PcD e idosos)
+PROTEÇÃO ESPECIAL MÉDIA: PAEFI (CREAS), Abordagem Social, MSE (LA e PSC), Proteção Especial PcD/Idoso
+PROTEÇÃO ESPECIAL ALTA: Acolhimento Institucional (abrigo, casa-lar, república, residência inclusiva, ILPI), Família Acolhedora, Proteção em Calamidade
+Cada serviço define: objetivos, usuários, provisões, condições de acesso, unidade de referência, resultados esperados.`,
+tags:['Tipificação','PAIF','PAEFI','SCFV','Acolhimento','MSE','Serviços'],
+link:'https://www.mds.gov.br/webarquivos/publicacao/assistencia_social/Normativas/tipificacao.pdf',tema:'servicos'},
+
+{id:24,o:'cnas',tipo:'Resolução CNAS',ano:2011,n:false,rev:false,
+num:'Resolução CNAS nº 17/2011',tit:'Categorias Profissionais do SUAS',
+ementa:'Ratifica as categorias profissionais de nível superior que compõem as equipes de referência do SUAS.',
+disp:`• Define Assistente Social e Psicólogo como profissionais essenciais e insubstituíveis
+• Regula cargos de coordenação técnica das unidades SUAS
+• Orienta sobre outras categorias: pedagogo, sociólogo, advogado
+• Fundamenta a contratação via concurso público`,
+tags:['Profissionais','Assistente Social','Psicólogo','Equipe de Referência','Concurso'],
+link:'https://www.mds.gov.br',tema:'gestao-financiamento'},
+
+{id:25,o:'cnas',tipo:'Resolução CNAS',ano:2012,n:false,rev:false,
+num:'Resolução CNAS nº 33/2012',tit:'NOB/SUAS 2012',
+ementa:'Aprova a NOB/SUAS revisada com novos mecanismos de gestão, financiamento e controle social.',
+disp:`• Revisa e atualiza os Pactos de Aprimoramento do SUAS por ente federado
+• Fortalece a Vigilância Socioassistencial como função estratégica
+• Regulamenta o Índice de Gestão Descentralizada (IGD) do SUAS
+• Disciplina o Plano Municipal/Estadual de AS como instrumento obrigatório`,
+tags:['NOB SUAS 2012','IGD','Pacto','Plano Municipal','Descentralização'],
+link:'https://www.mds.gov.br/webarquivos/arquivo/assistencia_social/nob_suas_2012.pdf',tema:'gestao-financiamento'},
+
+{id:26,o:'cnas',tipo:'Resolução CNAS',ano:2013,n:false,rev:false,
+num:'Resolução CNAS nº 01/2013',tit:'Reordenamento dos Serviços de Acolhimento',
+ementa:'Dispõe sobre o reordenamento dos serviços de acolhimento de crianças, adolescentes, adultos e famílias.',
+disp:`• Abrigos: capacidade máxima de 20 pessoas; casas-lares: até 10 pessoas
+• Repúblicas para jovens adultos (18–21 anos) egressos de acolhimento
+• Residências Inclusivas para PcD: até 10 pessoas
+• Define padrões mínimos de qualidade e preservação de vínculos familiares`,
+tags:['Acolhimento','Abrigo','Casa-Lar','Crianças','Adolescentes','República','Reordenamento'],
+link:'https://www.mds.gov.br',tema:'protecao-especial'},
+
+{id:27,o:'cnas',tipo:'Resolução CNAS',ano:2015,n:false,rev:false,
+num:'Resolução CNAS nº 11/2015',tit:'Vínculo das Entidades com o SUAS',
+ementa:'Dispõe sobre a regulamentação do vínculo das entidades e organizações de assistência social com o SUAS.',
+disp:`• Define critérios para vinculação ao SUAS via inscrição nos conselhos
+• Regulamenta o CNEAS (Cadastro Nacional de Entidades de AS)
+• Distingue entidades de atendimento, assessoramento e defesa e garantia de direitos`,
+tags:['Entidades','CNEAS','Vínculo SUAS','Organizações','Inscrição'],
+link:'https://www.mds.gov.br',tema:'entidades'},
+
+{id:28,o:'cnas',tipo:'Resolução CNAS',ano:2016,n:false,rev:false,
+num:'Resolução CNAS nº 07/2016',tit:'Parâmetros do Controle Social no SUAS',
+ementa:'Estabelece os parâmetros de funcionamento do controle social no SUAS.',
+disp:`• Regulamenta composição paritária: 50% governo + 50% sociedade civil
+• Define reuniões mínimas bimestrais com quórum mínimo
+• Trata da autonomia política e financeira dos conselhos
+• Disciplina as Conferências de Assistência Social`,
+tags:['Controle Social','Conselhos','CNAS','CEAS','CMAS','Conferência'],
+link:'https://www.mds.gov.br',tema:'controle-social'},
+
+{id:29,o:'cnas',tipo:'Resolução CNAS',ano:2019,n:false,rev:false,
+num:'Resolução CNAS nº 06/2019',tit:'Parâmetros para Residências Inclusivas',
+ementa:'Estabelece parâmetros de funcionamento das Residências Inclusivas para pessoas com deficiência.',
+disp:`• Capacidade máxima de 10 pessoas por residência
+• Equipe técnica mínima: AS, psicólogo e cuidadores
+• Critérios de elegibilidade: PcD adultas em situação de dependência`,
+tags:['Residência Inclusiva','Deficiência','PcD','Acolhimento','Proteção Especial'],
+link:'https://www.mds.gov.br',tema:'protecao-especial'},
+
+{id:30,o:'cnas',tipo:'Resolução CNAS',ano:2023,n:false,rev:false,
+num:'Resolução CNAS/MDS nº 130/2023',tit:'PROCAD-SUAS',
+ementa:'Institui o Programa de Fortalecimento do CadÚnico no SUAS para qualificação dos registros cadastrais.',
+disp:`• Cria o PROCAD-SUAS como programa de cofinanciamento federal para qualificação do CadÚnico
+• Repasse fundo a fundo para visitas domiciliares e busca ativa
+• Prioriza famílias unipessoais e beneficiários do BPC com cadastro desatualizado
+• Regulamentado pela Portaria MDS nº 995/2024`,
+tags:['PROCAD-SUAS','CadÚnico','Qualificação Cadastral','Cofinanciamento','Busca Ativa'],
+link:'https://www.mds.gov.br',tema:'gestao-financiamento'},
+
+{id:31,o:'cnas',tipo:'Resolução CNAS',ano:2024,n:false,rev:false,
+num:'Resolução CNAS nº 151/2024',tit:'Critérios para Reconhecimento de Entidades no SUAS',
+ementa:'Estabelece critérios para reconhecimento de entidades integrantes do SUAS, vedando comunidades terapêuticas.',
+disp:`• Veda expressamente a inscrição de comunidades terapêuticas nos conselhos de AS
+• Mantém obrigatoriedade de CNEAS para entidades vinculadas ao SUAS
+• Reafirma que a certificação CEBAS não substitui a inscrição no conselho`,
+tags:['Entidades','CNEAS','Comunidades Terapêuticas','Vínculo SUAS','2024'],
+link:'https://www.legisweb.com.br/legislacao/?id=458088',tema:'entidades'},
+
+{id:32,o:'cnas',tipo:'Resolução CIT',ano:2024,n:false,rev:false,
+num:'Resolução CIT nº 13/2024',tit:'PROCAD-SUAS — Critérios de Partilha',
+ementa:'Parâmetros pactuados tripartitamente para distribuição dos recursos do PROCAD-SUAS. Publicada em 19/04/2024.',
+disp:`• Parâmetros pactuados tripartitamente (União, estados, municípios) para o PROCAD-SUAS
+• Define distribuição de recursos por porte municipal e demanda cadastral`,
+tags:['CIT','PROCAD-SUAS','CadÚnico','Partilha','Tripartite'],
+link:'https://www.mds.gov.br',tema:'gestao-financiamento'},
+
+{id:33,o:'cnas',tipo:'Resolução CNAS',ano:2024,n:false,rev:false,
+num:'Resolução CNAS/MDS nº 152/2024',tit:'PROCAD-SUAS — Critérios de Transferência',
+ementa:'Estabelece critérios para transferências dos recursos do PROCAD-SUAS. Publicada em 24/04/2024.',
+disp:`• Complementa a Resolução CIT nº 13/2024 para repasse do PROCAD-SUAS
+• Regulamenta a destinação dos recursos às ações de qualificação cadastral`,
+tags:['PROCAD-SUAS','CadÚnico','Transferência','2024','Cofinanciamento'],
+link:'https://www.mds.gov.br',tema:'gestao-financiamento'},
+
+{id:34,o:'cnas',tipo:'Resolução CNAS',ano:2024,n:false,rev:false,
+num:'Resolução CNAS/MDS nº 117/2024',tit:'Critérios para Transferências — Ação 219G',
+ementa:'Estabelece critérios para transferências da Ação 219G. Publicada em 17/12/2024.',
+disp:`• Define valores máximos por porte municipal para a Ação 219G
+• Regulamenta critérios de elegibilidade para recebimento dos recursos
+• Articula com a Resolução CIT nº 17/2024`,
+tags:['219G','Estruturação da Rede','Transferência','Ação Orçamentária','Dezembro 2024'],
+link:'https://in.gov.br/en/web/dou/-/resolucao-cnas/mds-n-177-de-17-de-dezembro-de-2024-602576379',tema:'gestao-financiamento'},
+
+{id:35,o:'cnas',tipo:'Resolução CIT',ano:2024,n:false,rev:false,
+num:'Resolução CIT nº 17/2024',tit:'Critérios 219G — Comissão Intergestores Tripartite',
+ementa:'Parâmetros pactuados tripartitamente para a Ação 219G. Publicada em 13/12/2024.',
+disp:`• Regula a distribuição de recursos entre os entes federativos para a Ação 219G
+• Integra o conjunto normativo das portarias de dezembro de 2024`,
+tags:['CIT','Comissão Intergestores','219G','Pacto','Dezembro 2024'],
+link:'https://www.in.gov.br/en/web/dou/-/resolucao-cit-n-17-de-13-de-dezembro-de-2024-602959829',tema:'gestao-financiamento'},
+
+{id:36,o:'cnas',tipo:'Resolução CNAS',ano:2025,n:true,rev:false,
+num:'Resolução CNAS/MDS nº 182/2025',tit:'Assessoramento e Defesa de Direitos no SUAS — OSC',
+ementa:'Atualiza diretrizes para enquadramento de serviços de assessoramento e defesa de direitos no SUAS. Revoga a Res. CNAS nº 27/2011. Publicada em 13/02/2025.',
+disp:`• Define atividades de assessoramento e defesa de direitos no SUAS
+• Determina prazo de adequação das OSCs até 30/04/2026
+• Revoga: Resolução CNAS nº 27/2011`,
+tags:['OSC','Assessoramento','Defesa de Direitos','Entidades','2025'],
+link:'https://aplicacoes.mds.gov.br/snas/regulacao/visualizar.php?codigo=6890',tema:'entidades'},
+
+{id:37,o:'cnas',tipo:'Resolução CNAS',ano:2025,n:true,rev:false,
+num:'Resolução CNAS/MDS nº 202/2025',tit:'Conselhos de AS e Controle Social do PBF e CadÚnico',
+ementa:'Orienta os conselhos de AS quanto ao controle social do PBF e CadÚnico. Publicada em 28/07/2025.',
+disp:`• Reforça o papel dos conselhos no controle social do PBF e CadÚnico
+• Determina aplicação mínima de 10% do IGD/SUAS e IGD/PBF no financiamento do controle social
+• Novo percentual entra em vigor a partir de janeiro de 2026`,
+tags:['Controle Social','Conselhos','IGD','Bolsa Família','CadÚnico','2025'],
+link:'https://blog.gesuas.com.br/bolsa-familia-e-cadastro-unico-o-que-muda-com-a-nova-resolucao-cnas-no202-2025/',tema:'controle-social'},
+
+{id:38,o:'cnas',tipo:'Resolução CNAS',ano:2025,n:true,rev:false,
+num:'Resolução CNAS nº 213/2025',tit:'Parâmetros para Benefícios Eventuais no SUAS',
+ementa:'Estabelece parâmetros orientadores para concessão de benefícios eventuais. Publicada em 28/10/2025.',
+disp:`• Define benefícios eventuais como provisões preferencialmente em pecúnia
+• Proíbe exigência de cadastramento prévio no CadÚnico como critério obrigatório
+• Situações que geram direito: gestação, nascimento, morte, desastre, violência, rua, migração
+• Conselhos e órgãos gestores têm 1 ano para adequar normativas locais`,
+tags:['Benefícios Eventuais','CadÚnico','Desburocratização','Vulnerabilidade','2025'],
+link:'https://www.in.gov.br/web/dou/-/resolucao-cnas-n-213-de-28-de-outubro-de-2025-665161180',tema:'protecao-basica'},
+
+// ──── PORTARIAS MDS — HISTÓRICAS ────
+{id:39,o:'mds',tipo:'Portaria MDS',ano:2009,n:false,rev:false,
+num:'Portaria MDS nº 288/2009',tit:'Orientações Técnicas para o CRAS',
+ementa:'Estabelece orientações técnicas para os CRAS, definindo território de abrangência, equipe mínima e funcionamento.',
+disp:`• Define território de referência por porte do município
+• Equipe mínima: coordenador, 2 técnicos de nível superior (1 AS obrigatório), 2 de nível médio
+• Regulamenta o PAIF como serviço obrigatório e exclusivo do CRAS
+• Base para as Portarias MDS nº 71 e 72/2024`,
+tags:['CRAS','PAIF','Proteção Básica','Território','Equipe Mínima'],
+link:'https://www.mds.gov.br',tema:'protecao-basica'},
+
+{id:40,o:'mds',tipo:'Portaria MDS',ano:2010,n:false,rev:false,
+num:'Portaria MDS nº 843/2010',tit:'Cofinanciamento Federal — Pisos de Proteção Social',
+ementa:'Dispõe sobre as disposições gerais de cofinanciamento federal dos serviços socioassistenciais.',
+disp:`• Define os Pisos de Proteção Social Básica e Especial
+• Regulamenta as transferências fundo a fundo do FNAS para estados e municípios
+• Estabelece condicionalidades para recebimento dos recursos
+• Base normativa anterior às Portarias 1.043/2024 e seus blocos de financiamento`,
+tags:['Cofinanciamento','Pisos','Fundo a Fundo','Financiamento','Repasse'],
+link:'https://www.mds.gov.br',tema:'gestao-financiamento'},
+
+{id:41,o:'mds',tipo:'Portaria MDS',ano:2011,n:false,rev:false,
+num:'Portaria MDS nº 78/2011',tit:'Serviço de Proteção Social a Adolescentes — MSE',
+ementa:'Regulamenta o Serviço de Proteção Social a Adolescentes em Cumprimento de Medida Socioeducativa em Meio Aberto (LA e PSC).',
+disp:`• Regulamenta LA e PSC no CREAS
+• Define equipe mínima: AS, psicólogo, advogado e orientador social
+• Estabelece PIA (Plano Individual de Atendimento)
+• Trata da articulação com SINASE, Judiciário e Conselho Tutelar`,
+tags:['MSE','Socioeducativo','Adolescente','CREAS','LA','PSC','SINASE'],
+link:'https://www.mds.gov.br',tema:'protecao-especial'},
+
+{id:42,o:'mds',tipo:'Portaria MDS',ano:2015,n:false,rev:true,
+revInfo:'Revogada pela Portaria MDS nº 1.043, de 24/12/2024',
+num:'Portaria MDS nº 113/2015',tit:'Cofinanciamento Federal do SUAS — Fundo a Fundo ⚠️',
+ementa:'Regulamentou por uma década as regras gerais de transferência fundo a fundo do FNAS para estados e municípios. REVOGADA pela Portaria MDS nº 1.043/2024.',
+disp:`• Regulamentou o cofinanciamento via pisos de proteção por bloco de financiamento
+• Definiu regras de prestação de contas no BB Gestão Ágil (substituído pelo AgilizaSUAS)
+• Vigorou de 2015 a dezembro de 2024
+• ⚠️ REVOGADA pela Portaria MDS nº 1.043, de 24/12/2024`,
+tags:['Cofinanciamento','Fundo a Fundo','REVOGADA','Histórico','FNAS','Pisos'],
+link:'https://www.mds.gov.br',tema:'gestao-financiamento'},
+
+{id:43,o:'mds',tipo:'Portaria SNAS',ano:2017,n:false,rev:false,
+num:'Portaria SNAS nº 143/2017',tit:'Prontuário Eletrônico do SUAS',
+ementa:'Institui o Prontuário Eletrônico do SUAS como instrumento obrigatório de registro dos atendimentos.',
+disp:`• Cria o Prontuário Eletrônico como instrumento padronizado de registro socioassistencial
+• Define campos obrigatórios: identificação, composição familiar, vulnerabilidades, encaminhamentos
+• Regulamenta o uso no CRAS (PAIF) e CREAS (PAEFI)
+• Integrado ao CadÚnico pela Portaria MDS nº 1.084/2025`,
+tags:['Prontuário Eletrônico','SUAS','Registro','CRAS','CREAS','Sigilo'],
+link:'https://www.mds.gov.br',tema:'servicos'},
+
+{id:44,o:'mds',tipo:'Portaria MDS',ano:2018,n:false,rev:false,
+num:'Portaria MDS nº 464/2018',tit:'Programa Criança Feliz',
+ementa:'Regulamenta o Programa Criança Feliz voltado para o desenvolvimento integral na primeira infância.',
+disp:`• Público: crianças de 0–3 anos do Bolsa Família; 0–6 anos com BPC
+• Regulamenta visitas domiciliares mensais por visitadores
+• Equipe: visitadores, supervisores e coordenadores
+• Integra SUAS com saúde e educação na primeira infância`,
+tags:['Criança Feliz','Primeira Infância','Visita Domiciliar','Desenvolvimento Integral'],
+link:'https://www.mds.gov.br',tema:'protecao-basica'},
+
+{id:45,o:'mds',tipo:'Portaria MDS',ano:2019,n:false,rev:false,
+num:'Portaria MDS nº 09/2019',tit:'Serviço Especializado em Abordagem Social',
+ementa:'Regulamenta o Serviço Especializado em Abordagem Social para pessoas em situação de rua.',
+disp:`• Define equipe mínima para abordagens nos espaços públicos
+• Estabelece rotinas e protocolos de abordagem diurna e noturna
+• Regula articulação com a rede socioassistencial e intersetorial
+• Define estratégias de busca ativa em logradouros e abrigos`,
+tags:['Abordagem Social','Situação de Rua','Proteção Especial','Espaço Público','CREAS'],
+link:'https://www.mds.gov.br',tema:'protecao-especial'},
+
+{id:46,o:'mds',tipo:'Portaria MDS',ano:2021,n:false,rev:false,
+num:'Portaria MDS nº 86/2021',tit:'Proteção Social Básica no Domicílio — Idoso e PcD',
+ementa:'Regulamenta o Serviço de Proteção Social Básica no Domicílio para pessoas idosas e com deficiência.',
+disp:`• Público: idosos e PcD com dependência e vínculos familiares frágeis
+• Regulamenta visitas domiciliares preventivas de fortalecimento de vínculos
+• Equipe técnica mínima referenciada no CRAS
+• Articula com a rede de saúde e assistência social`,
+tags:['Idoso','Deficiência','Domicílio','Proteção Básica','CRAS','PcD'],
+link:'https://www.mds.gov.br',tema:'protecao-basica'},
+
+{id:47,o:'mds',tipo:'Portaria MDS',ano:2022,n:false,rev:false,
+num:'Portaria MC nº 810/2022',tit:'CadÚnico — Regras de Inscrição, Atualização e Exclusão',
+ementa:'Regulamenta os procedimentos de inscrição, atualização e exclusão de famílias no Cadastro Único.',
+disp:`• Define prazo de 48 meses para obrigatoriedade de atualização cadastral
+• Regulamenta exclusão automática de famílias sem atualização no prazo
+• Orienta sobre famílias em situações especiais (rua, itinerante, indígena, quilombola)
+• Fundamenta as INs de Qualificação Cadastral (2023, 2024, 2025)`,
+tags:['CadÚnico','Atualização','Exclusão','48 Meses','Famílias','CRAS'],
+link:'https://www.gov.br/mds/pt-br',tema:'gestao-financiamento'},
+
+{id:48,o:'mds',tipo:'Portaria MDS',ano:2023,n:false,rev:false,
+num:'Portaria MDS nº 137/2023',tit:'Programa Pé-de-Meia',
+ementa:'Regulamenta o Programa Pé-de-Meia de incentivo financeiro-educacional para estudantes do ensino médio.',
+disp:`• Elegibilidade: estudantes do ensino médio público inscritos no CadÚnico
+• Incentivo por frequência escolar e por conclusão do ensino médio
+• Pagamento via conta poupança social digital (Caixa)
+• Integra CadÚnico, bases do INEP/MEC e sistemas do MDS`,
+tags:['Pé-de-Meia','Educação','Ensino Médio','Adolescentes','Transferência de Renda'],
+link:'https://www.mds.gov.br',tema:'protecao-basica'},
+
+{id:49,o:'mds',tipo:'Portaria MDS',ano:2023,n:false,rev:false,
+num:'Portaria MDS nº 897/2023',tit:'Gestão dos Benefícios do Programa Bolsa Família',
+ementa:'Estabelece normas e procedimentos para a gestão dos benefícios do Programa Bolsa Família.',
+disp:`• Define tipos de benefícios: BRC, Benefício Complementar, Benefício Primeira Infância, BVA
+• Regulamenta inclusão, manutenção, suspensão e cancelamento de benefícios
+• Trata da Regra de Proteção (saída gradual do programa)
+• Alterada pela Portaria MDS nº 1.084/2025`,
+tags:['Bolsa Família','Benefícios','Inclusão','Revisão Cadastral','Regra de Proteção'],
+link:'https://www.mds.gov.br',tema:'protecao-basica'},
+
+{id:50,o:'mds',tipo:'Portaria MDS',ano:2023,n:false,rev:true,
+revInfo:'Revogada pela Portaria MDS nº 1.041, de 23/12/2024',
+num:'Portaria MDS nº 887/2023',tit:'IGD — Índice de Gestão Descentralizada ⚠️',
+ementa:'Regulamentou o IGD do Bolsa Família e CadÚnico em 2023. REVOGADA pela Portaria MDS nº 1.041/2024.',
+disp:`• Estabeleceu os mecanismos do IGD-PBF e IGD-E para 2023–2024
+• Definiu as taxas de desempenho municipal (TAC, TAFE, TAAS)
+• ⚠️ REVOGADA em 23/12/2024 pela Portaria MDS nº 1.041/2024`,
+tags:['IGD','Gestão Descentralizada','Bolsa Família','CadÚnico','REVOGADA'],
+link:'https://www.mds.gov.br',tema:'gestao-financiamento'},
+
+{id:51,o:'mds',tipo:'Portaria MDS',ano:2024,n:false,rev:false,
+num:'Portaria Interministerial MDS/MPS nº 27/2024',tit:'BPC — Inscrição e Atualização no CadÚnico',
+ementa:'Estabelece procedimentos para inscrição e atualização no CadÚnico como condição para manutenção do BPC.',
+disp:`• Beneficiários do BPC devem estar inscritos e atualizados no CadÚnico
+• Prazo para municípios até 50 mil hab.: 45 dias após notificação
+• Prazo para municípios acima de 50 mil hab.: 90 dias após notificação
+• Após prazo: suspensão (30 dias) e posterior cancelamento`,
+tags:['BPC','CadÚnico','Inscrição','Notificação','INSS','Idoso','Deficiência'],
+link:'https://www.gov.br/mds/pt-br',tema:'protecao-basica'},
+
+{id:52,o:'mds',tipo:'Portaria MDS',ano:2024,n:false,rev:true,
+revInfo:'Revogada pela Portaria Conjunta INSS/MDS nº 34, de 09/10/2025',
+num:'Portaria Conjunta MDS/INSS nº 28/2024',tit:'BPC — Biometria e Verificação Cadastral ⚠️',
+ementa:'Exigiu registro biométrico para novos requerentes do BPC a partir de setembro de 2024. REVOGADA pela Port. Conjunta INSS/MDS nº 34/2025.',
+disp:`• Exigiu biometria (CIN, título eleitoral ou CNH) para novos requerimentos do BPC
+• ⚠️ REVOGADA pela Portaria Conjunta INSS/MDS nº 34, de 09/10/2025`,
+tags:['BPC','INSS','Biometria','CIN','Concessão','REVOGADA'],
+link:'https://www.gov.br/mds/pt-br',tema:'protecao-basica'},
+
+{id:53,o:'mds',tipo:'Portaria MDS',ano:2024,n:false,rev:false,
+num:'Portaria MDS nº 71/2024',tit:'Orientações Técnicas para o CRAS',
+ementa:'Dispõe sobre orientações técnicas para implantação e funcionamento do CRAS.',
+disp:`• Define território de abrangência por porte municipal
+• Equipe mínima: 2 técnicos de nível superior (1 AS obrigatório) + 2 de nível médio + coordenador
+• Funções do CRAS: PAIF, gestão territorial e referência da rede básica
+• Define requisitos de infraestrutura física e acessibilidade`,
+tags:['CRAS','Proteção Básica','Território','PAIF','Trabalho Social','Equipe'],
+link:'https://www.mds.gov.br',tema:'protecao-basica'},
+
+{id:54,o:'mds',tipo:'Portaria MDS',ano:2024,n:false,rev:false,
+num:'Portaria MDS nº 72/2024',tit:'Orientações Técnicas para o CREAS',
+ementa:'Dispõe sobre orientações técnicas para implantação e funcionamento do CREAS.',
+disp:`• Define cobertura territorial: CREAS municipal ou regional
+• Equipe mínima: coordenador, AS, psicólogo, advogado, pedagogo e nível médio
+• PAEFI como serviço central e obrigatório do CREAS
+• Define requisitos de infraestrutura e garantia de sigilo`,
+tags:['CREAS','Proteção Especial','PAEFI','Média Complexidade','Violência','Equipe'],
+link:'https://www.mds.gov.br',tema:'protecao-especial'},
+
+{id:55,o:'mds',tipo:'Portaria MDS',ano:2024,n:false,rev:false,
+num:'Portaria MDS nº 995/2024',tit:'PROCAD-SUAS — Fortalecimento do CadÚnico no SUAS',
+ementa:'Regulamenta o PROCAD-SUAS, com repasse fundo a fundo para qualificação cadastral.',
+disp:`• Regulamenta o PROCAD-SUAS criado pela Resolução CNAS/MDS nº 130/2023
+• Recursos para: visitas domiciliares, busca ativa, cadastramento de vulneráveis
+• Prioriza famílias unipessoais e beneficiários do BPC sem cadastro ou desatualizado`,
+tags:['PROCAD-SUAS','CadÚnico','Qualificação Cadastral','Fundo a Fundo','Busca Ativa'],
+link:'https://www.camaramedianeira.pr.gov.br/archives/legislative/pl_109_portarias_mds_130_2023_e_995_2024_regulamenta_o_procad_suas.pdf',tema:'gestao-financiamento'},
+
+{id:56,o:'mds',tipo:'Portaria SNAS/MDS',ano:2024,n:false,rev:true,
+revInfo:'Revogada pela Portaria SNAS/MDS nº 47, de 25/04/2025',
+num:'Portaria SNAS/MDS nº 104/2024',tit:'Rol de Veículos, Equipamentos e Materiais — SUAS ⚠️',
+ementa:'Estabeleceu o rol padronizado de itens adquiríveis com recursos federais no SUAS. REVOGADA pela Portaria SNAS/MDS nº 47/2025.',
+disp:`• Definiu itens padronizados para Proteção Básica, Especial e gestão do SUAS
+• Publicada em 14/06/2024
+• ⚠️ REVOGADA pela Portaria SNAS/MDS nº 47, de 25/04/2025`,
+tags:['Equipamentos','Veículos','GND4','219G','REVOGADA'],
+link:'https://www.mds.gov.br',tema:'gestao-financiamento'},
+
+{id:57,o:'mds',tipo:'Portaria MDS',ano:2024,n:false,rev:false,
+num:'Portaria MDS nº 1.041/2024',tit:'IGD — Índice de Gestão Descentralizada (Dez/2024)',
+ementa:'Regulamenta o IGD-PBF e IGD-E. Revoga as Portarias nº 887/2023 e nº 950/2023. Publicada em 23/12/2024.',
+disp:`VALOR UNITÁRIO: reduzido de R$ 4,00 para R$ 3,25
+TAXAS MÍNIMAS 2025:
+• TAC — Atualização Cadastral: mínimo 70%
+• TAFE — Famílias em Extrema Pobreza: mínimo 40%
+• TAAS — Acompanhamento de Saúde: mínimo 40%
+CONTROLE SOCIAL: mínimo 3% dos recursos
+ISENÇÃO: ampliada para municípios com saldo até R$ 90.000
+REVOGA: Portaria MDS nº 887/2023 e Portaria MDS nº 950/2023`,
+tags:['IGD','Bolsa Família','CadÚnico','TAC','TAFE','TAAS','Dezembro 2024'],
+link:'https://www.in.gov.br/web/dou/-/portaria-mds-n-1.041-de-23-de-dezembro-de-2024-603873916',tema:'gestao-financiamento'},
+
+{id:58,o:'mds',tipo:'Portaria MDS',ano:2024,n:false,rev:false,
+num:'Portaria MDS nº 1.043/2024',tit:'Cofinanciamento Federal do SUAS — Fundo a Fundo',
+ementa:'Regulamenta a transferência, execução e prestação de contas do cofinanciamento federal do SUAS fundo a fundo. Revoga a Portaria MDS nº 113/2015. Publicada em 24/12/2024.',
+disp:`BLOCOS DE FINANCIAMENTO: I. Proteção Básica; II. Proteção Especial; III. Gestão do SUAS; IV. Gestão do PBF e CadÚnico
+PRESTAÇÃO DE CONTAS — Via AgilizaSUAS (substitui BB Gestão Ágil):
+• Exercício 2024: Gestores até 30/09/2025; Conselhos até 31/12/2025
+• A partir de 2025: prazo até 1º de março do ano seguinte
+PLANO DE AÇÃO: Instrumento do SUASWEB extinto
+REVOGA: Portaria MDS nº 113/2015 e Portaria SNAS nº 124/2017`,
+tags:['Cofinanciamento','Fundo a Fundo','FNAS','AgilizaSUAS','Blocos de Financiamento','Dezembro 2024'],
+link:'https://www.in.gov.br/en/web/dou/-/portaria-mds-n-1.043-de-24-de-dezembro-2024-603879318',tema:'gestao-financiamento'},
+
+{id:59,o:'mds',tipo:'Portaria MDS',ano:2024,n:false,rev:false,
+num:'Portaria MDS nº 1.044/2024',tit:'Transferências Fundo a Fundo — Ação Orçamentária 219G',
+ementa:'Regulamenta os recursos da Ação 219G — Estruturação da Rede e Fortalecimento da Gestão do SUAS. Revoga a Portaria nº 580/2020. Publicada em 24/12/2024.',
+disp:`EQUIPAMENTOS E MATERIAIS (GND4): permite repasse a entidades de AS (observar MROSC)
+CUSTEIO (GND3 — Incremento Temporário): via EstruturaSUAS; programações anteriores têm prazo até 31/12/2025
+EMENDAS PARLAMENTARES: bancada, comissão e pleitos para serviços, gestão e controle social
+REVOGA: Portaria MC nº 580/2020`,
+tags:['219G','GND3','GND4','Emendas Parlamentares','EstruturaSUAS','Dezembro 2024'],
+link:'https://www.in.gov.br/en/web/dou/-/portaria-mds-n-1.044-de-24-de-dezembro-de-2024-603880830',tema:'gestao-financiamento'},
+
+{id:60,o:'mds',tipo:'Portaria MDS',ano:2024,n:false,rev:false,
+num:'Portaria MDS nº 1.045/2024',tit:'Ações Estruturantes — Emendas de Bancada e Comissão 2025',
+ementa:'Define critérios para execução de emendas de bancada e comissão para 2025, nos termos da LC nº 210/2024. Publicada em 24/12/2024.',
+disp:`• Cumpre art. 15 da Lei Complementar Federal nº 210/2024
+• Estabelece critérios para execução de emendas parlamentares de bancada e comissão
+• Define prioridades e fluxos de execução dos projetos estruturantes para 2025`,
+tags:['Emendas Parlamentares','Bancada','Comissão','Ações Estruturantes','Orçamento 2025'],
+link:'https://www.in.gov.br/en/web/dou/-/portaria-mds-n-1.045-de-24-de-dezembro-de-2024-603886592',tema:'gestao-financiamento'},
+
+// ──── PORTARIAS MDS 2025 ────
+{id:61,o:'mds',tipo:'Portaria MDS',ano:2025,n:true,rev:false,
+num:'Portaria MDS nº 1.058/2025',tit:'Gestão de Condicionalidades do Programa Bolsa Família',
+ementa:'Regulamenta a gestão de condicionalidades do PBF. Revoga a Portaria MC nº 766/2022. Publicada em 18/02/2025.',
+disp:`• Regulamenta todas as etapas de gestão de condicionalidades: identificação, verificação, repercussão e recursos
+• Define o papel do MDS, MEC e Ministério da Saúde
+• Regulamenta o SICON para gestão das condicionalidades de educação
+• Revoga: Portaria MC nº 766, de 20 de abril de 2022`,
+tags:['Condicionalidades','Bolsa Família','SICON','Educação','Saúde','2025'],
+link:'https://sedu.es.gov.br/Media/sedu/Portarias%20e%20Editais/PORTARIA%20MDS%20N%C2%BA%201.058,%20DE%2018%20DE%20FEVEREIRO%20DE%202025%20-%20PORTARIA%20MDS%20N%C2%BA%201.PDF',tema:'protecao-basica'},
+
+{id:62,o:'mds',tipo:'Portaria MDS',ano:2025,n:true,rev:false,
+num:'Portaria MDS nº 1.084/2025',tit:'Regra de Proteção do PBF e Integração com Prontuário Eletrônico',
+ementa:'Altera a Portaria MDS nº 897/2023 para modificar a Regra de Proteção do PBF e integrar o prontuário eletrônico ao CadÚnico. Publicada em 14/05/2025.',
+disp:`• Altera as regras de proteção do PBF (saída gradual do programa)
+• Dispõe sobre a integração do prontuário eletrônico (Port. SNAS nº 143/2017) ao CadÚnico
+• Permite que informações do prontuário subsidiem a gestão de benefícios`,
+tags:['Bolsa Família','Regra de Proteção','Prontuário Eletrônico','CadÚnico','2025'],
+link:'https://www.in.gov.br/en/web/dou/-/portaria-mds-n-1.084-de-14-de-maio-de-2025-629477045',tema:'protecao-basica'},
+
+{id:63,o:'mds',tipo:'Portaria Conjunta MDS/INSS',ano:2025,n:true,rev:false,
+num:'Portaria Conjunta INSS/MDS nº 34/2025',tit:'BPC — Regulamentação Integral da Operacionalização',
+ementa:'Consolida toda a regulamentação do BPC. Revoga as Portarias Conjuntas nº 3/2018 e 28/2024. Publicada em 09/10/2025.',
+disp:`• Exige inscrição e atualização no CadÚnico como requisito obrigatório
+• Exige CPF para todos os membros do grupo familiar
+• Utiliza bases administrativas (CadÚnico, CNIS) sem exigir documentos físicos
+• Inclui biometria obrigatória para novos requerimentos
+• Revoga: Portarias Conjuntas MDS/INSS nº 3/2018 e 28/2024`,
+tags:['BPC','INSS','Concessão','Revisão','CadÚnico','Deficiência','Idoso','2025'],
+link:'https://www.legisweb.com.br/legislacao/?id=484781',tema:'protecao-basica'},
+
+{id:64,o:'mds',tipo:'Portaria SNAS/MDS',ano:2025,n:true,rev:false,
+num:'Portaria SNAS/MDS nº 47/2025',tit:'Rol de Veículos, Equipamentos e Materiais do SUAS (Atualizado)',
+ementa:'Atualiza o rol de itens adquiríveis com recursos federais no SUAS. Revoga a Portaria SNAS/MDS nº 104/2024. Publicada em 25/04/2025.',
+disp:`• Atualiza os Anexos I e II com base nas diretrizes da Portaria MDS nº 1.044/2024
+• Mantém colunas para calamidade pública, emergências e atendimento a migrantes
+• Prazo mínimo de vinculação: 3 anos para equipamentos e 5 anos para veículos
+• Revoga: Portaria SNAS/MDS nº 104, de 14/06/2024`,
+tags:['Equipamentos','Veículos','GND4','Materiais Permanentes','219G','2025'],
+link:'https://www.in.gov.br/en/web/dou/-/portaria-snas/mds-n-47-de-25-de-abril-de-2025-*-626968327',tema:'gestao-financiamento'},
+
+{id:65,o:'mds',tipo:'Portaria MDS',ano:2025,n:true,rev:false,
+num:'Portaria MDS — Plano Nacional de Cuidados (Dez/2025)',tit:'Plano Nacional de Cuidados — Ações, Governança e Adesão',
+ementa:'Três portarias publicadas em 15/12/2025 instituem o Plano Nacional de Cuidados, com 79 iniciativas e R$ 25 bilhões até 2027.',
+disp:`PORTARIA 1 — 79 iniciativas em 5 eixos: Garantia de direitos, Compatibilização trabalho-cuidado, Trabalho decente, Reconhecimento do cuidado, Governança
+PORTARIA 2 — Governança: Comitê Estratégico paritário + Comitê Gestor, 20 ministérios envolvidos
+PORTARIA 3 — Adesão de estados, DF e municípios; protocolo integrado SUS/SUAS para idosos no domicílio; investimento R$ 25 bilhões até 2027`,
+tags:['Plano Nacional de Cuidados','Cuidotecas','Idoso','Domicílio','SUS/SUAS','Dezembro 2025'],
+link:'https://www.gov.br/mds/pt-br/noticias-e-conteudos/desenvolvimento-social/noticias-desenvolvimento-social/plano-nacional-de-cuidados-tera-r-25-bilhoes-do-governo-do-brasil',tema:'cuidados'},
+
+{id:66,o:'mds',tipo:'Portaria MDS',ano:2026,n:true,rev:false,
+num:'Portaria MDS nº 1.151/2026',tit:'IGD — Alteração do Redutor Financeiro 2026',
+ementa:'Altera o art. 8º da Portaria MDS nº 1.041/2024 para ajustar o redutor financeiro do IGD para 2026. Publicada em 27/01/2026.',
+disp:`• Altera os critérios do redutor financeiro aplicado ao IGD para o exercício de 2026
+• Prevê elevação das taxas mínimas de desempenho (TAC, TAFE, TAAS) a partir de 2026
+• Fundamenta a IN SENARC nº 52/2026 sobre teto do IGD-E para 2026`,
+tags:['IGD','Redutor Financeiro','2026','TAC','TAFE','TAAS','Bolsa Família'],
+link:'https://www.mds.gov.br',tema:'gestao-financiamento'},
+
+// ──── INSTRUÇÕES NORMATIVAS ────
+{id:67,o:'mds',tipo:'IN SNAS/MDS',ano:2025,n:true,rev:false,
+num:'IN SNAS/MDS nº 2/2025',tit:'Reparos e Manutenções em Unidades Públicas Socioassistenciais',
+ementa:'Estabelece regras e diretrizes para execução de reparos e manutenções em unidades públicas do SUAS com recursos do cofinanciamento federal. Publicada em 31/10/2025.',
+disp:`• Define o que se enquadra como reparo e manutenção (diferentemente de obra nova)
+• Regulamenta o uso de recursos do cofinanciamento federal (blocos I, II e III) para manutenção
+• Estabelece limites de valores por tipo de intervenção
+• Define obrigações de documentação e prestação de contas
+• Publicada no DOU de 31/10/2025`,
+tags:['Manutenção','Unidades SUAS','CRAS','CREAS','Cofinanciamento','2025'],
+link:'https://fnas.mds.gov.br/snas-06-11/',tema:'gestao-financiamento'},
+
+{id:68,o:'mds',tipo:'IN Conjunta',ano:2023,n:false,rev:false,
+num:'IN SAGICAD/SENARC/SNAS/MDS nº 2/2023',tit:'Qualificação Cadastral CadÚnico 2023',
+ementa:'Define procedimentos, cronograma e repercussões da Qualificação do CadÚnico de 2023.',
+disp:`• Define os públicos da Averiguação Cadastral (renda formal, unipessoal) e Revisão Cadastral
+• Estabelece cronograma de repercussões nos benefícios do PBF
+• Regulamenta impedimento de habilitação ao PBF durante o processo`,
+tags:['CadÚnico','Qualificação Cadastral','Averiguação','Revisão','PBF','2023'],
+link:'https://www.gov.br/mds/pt-br/acesso-a-informacao/legislacao/instrucoes',tema:'gestao-financiamento'},
+
+{id:69,o:'mds',tipo:'IN SAGICAD/MDS',ano:2023,n:false,rev:false,
+num:'IN SAGICAD/MDS nº 04/2023',tit:'CadÚnico Versão 7 — Formulários e Sistema',
+ementa:'Estabelece definições técnicas e procedimentos para a Versão 7 dos Formulários e do Sistema do CadÚnico. Revoga a IN nº 02/Senarc/MDS de 2011.',
+disp:`• Define os campos obrigatórios e opcionais do novo formulário CadÚnico v7
+• Regulamenta o Sistema de Cadastro Único (v7) para operação pelos municípios
+• Trata dos dados de identificação, composição familiar, renda e habitação
+• Revoga a IN nº 02/Senarc/MDS, de 26 de agosto de 2011`,
+tags:['CadÚnico','Versão 7','Formulário','Sistema','Operação Municipal'],
+link:'https://www.mds.gov.br',tema:'gestao-financiamento'},
+
+{id:70,o:'mds',tipo:'IN SENARC/MDS',ano:2024,n:false,rev:false,
+num:'IN SENARC/MDS nº 44/2024',tit:'IGD — Prazos de Prestação de Contas Exercício 2023',
+ementa:'Divulga prazos e procedimentos para prestação de contas do IGD referentes ao exercício de 2023.',
+disp:`• Define prazo para gestores municipais lançarem a prestação de contas no sistema
+• Define prazo para deliberação dos conselhos de AS sobre a prestação de contas
+• Esclarece o papel do conselho de AS como instância de controle social do IGD`,
+tags:['IGD','Prestação de Contas','2023','Conselhos','Transparência'],
+link:'https://aplicacoes.mds.gov.br/snas/regulacao/visualizar.php?codigo=6849',tema:'gestao-financiamento'},
+
+{id:71,o:'mds',tipo:'IN SENARC/MDS',ano:2025,n:true,rev:false,
+num:'IN SENARC/MDS nº 47/2025',tit:'IGD-E — Teto para Cálculo e Pagamento 2025',
+ementa:'Estabelece o teto para cálculo e pagamento do IGD-E para o ano de 2025. Publicada em 31/01/2025.',
+disp:`• Fixa teto anual do IGD-E para 2025 (base na Portaria MDS nº 1.041/2024)
+• Critérios de distribuição: 30% igualitário, 35% por famílias pobres, 17,5% por área, 17,5% por municípios`,
+tags:['IGD-E','Teto','2025','Estados','Gestão Descentralizada','CadÚnico'],
+link:'https://www.bsgestaopublica.com.br/instrucao-normativa-mds-senarc-no-47-de-31-de-janeiro-de-2025/',tema:'gestao-financiamento'},
+
+{id:72,o:'mds',tipo:'IN Conjunta',ano:2025,n:true,rev:false,
+num:'IN SAGICAD/SENARC/SNAS/MDS nº 1/2025',tit:'Qualificação Cadastral CadÚnico 2025',
+ementa:'Define públicos, procedimentos, cronograma e repercussões da Qualificação do CadÚnico de 2025. Publicada em 26/02/2025.',
+disp:`• Define 7 públicos prioritários para a Qualificação Cadastral 2025
+• Público 1: famílias há mais de 48 meses sem atualização — exclusão a partir de julho/2025
+• Famílias com CPF ausente devem regularizar a partir de março/2025 (novo CadÚnico)`,
+tags:['CadÚnico','Qualificação Cadastral','2025','Averiguação','Revisão','PBF','CPF'],
+link:'https://in.gov.br/web/dou/-/instrucao-normativa-conjunta-n-1-sagicad/senarc/snas/mds-de-26-de-fevereiro-de-2025-615377962',tema:'gestao-financiamento'},
+
+{id:73,o:'mds',tipo:'IN Conjunta',ano:2025,n:true,rev:false,
+num:'IN MDS/SENARC/SNAS nº 4/2025',tit:'Condicionalidades do PBF — Procedimentos Complementares',
+ementa:'Procedimentos complementares para gestão de condicionalidades do PBF, nos termos da Portaria MDS nº 1.058/2025. Publicada em 27/06/2025.',
+disp:`• Regulamenta o Trabalho Social com Famílias e Territórios (TSFT) no contexto das condicionalidades
+• Define atribuições da SNAS, estados e municípios nas condicionalidades
+• Regulamenta o uso do SICON para registro do TSFT
+• Prazo de arquivamento dos documentos de recursos: mínimo 5 anos`,
+tags:['Condicionalidades','Bolsa Família','TSFT','SICON','SNAS','2025'],
+link:'https://www.lex.com.br/instrucao-normativa-conjunta-mds-e-senarc-e-snas-no-4-de-27-de-junho-de-2025/',tema:'gestao-financiamento'},
+
+{id:74,o:'mds',tipo:'IN SAGICAD/MDS',ano:2026,n:true,rev:false,
+num:'IN SAGICAD/MDS nº 18/2026',tit:'Gestão de Riscos e Irregularidades no CadÚnico 2026',
+ementa:'Consolida procedimentos para gestão de riscos e irregularidades cadastrais. Publicada em 16/01/2026.',
+disp:`• Cria sistema eletrônico obrigatório para formalizar comunicação de denúncias
+• Define tipos de agentes (público, externo, gestor, coordenador, técnico, operador)
+• Reafirma princípio da não criminalização da pobreza em todas as fases`,
+tags:['CadÚnico','Irregularidade','Gestão de Riscos','2026','Denúncias','Pobreza'],
+link:'https://www.in.gov.br/web/dou/-/instrucao-normativa-sagicad/mds-n-18-de-16-de-janeiro-de-2026-682039766',tema:'gestao-financiamento'},
+
+{id:75,o:'mds',tipo:'IN SAGICAD/MDS',ano:2026,n:true,rev:false,
+num:'IN SAGICAD/MDS nº 20/2026',tit:'CadÚnico — Situações Excepcionais para Cadastro Fora do Domicílio',
+ementa:'Estabelece situações excepcionais em que não será exigido o cadastro no domicílio. Publicada em 22/01/2026.',
+disp:`• Define situações especiais em que a visita domiciliar pode ser dispensada
+• Inclui: pessoas em situação de rua, em acolhimento institucional, impossibilidade física documentada`,
+tags:['CadÚnico','Domicílio','Excepcional','Situação de Rua','Acolhimento','2026'],
+link:'https://www.gov.br/mds/pt-br/acesso-a-informacao/legislacao/instrucoes/instrucao-normativa-sagicad-mds-no-20-de-21-de-janeiro-de-2026',tema:'gestao-financiamento'},
+
+{id:76,o:'mds',tipo:'IN SENARC/MDS',ano:2026,n:true,rev:false,
+num:'IN SENARC/MDS nº 52/2026',tit:'IGD-E — Teto para Cálculo e Pagamento 2026',
+ementa:'Estabelece o teto para cálculo e pagamento do IGD-E para o ano de 2026. Publicada em 29/01/2026.',
+disp:`• Fixa teto anual de até R$ 23.000.000,00 por estado para repasse via IGD-E em 2026
+• Critérios: 30% igualitário, 35% por cadastros de famílias pobres atualizados, 17,5% por área, 17,5% por municípios
+• Fundamentada na Portaria MDS nº 1.041/2024 e Portaria MDS nº 1.151/2026`,
+tags:['IGD-E','Teto','2026','Estados','Gestão Descentralizada','CadÚnico'],
+link:'https://www.in.gov.br/web/dou/-/instrucao-normativa-n-52/senarc/mds-de-29-de-janeiro-de-2026-684187207',tema:'gestao-financiamento'},
+
+// ──── FNAS ────
+{id:77,o:'fnas',tipo:'Resolução FNAS',ano:2016,n:false,rev:false,
+num:'Resolução FNAS nº 01/2016',tit:'Critérios de Partilha dos Recursos do FNAS',
+ementa:'Estabelece os critérios de partilha dos recursos do FNAS para cofinanciamento dos serviços socioassistenciais.',
+disp:`• Define variáveis para distribuição: IDH, população em vulnerabilidade, desempenho da gestão
+• Regulamenta repasses mensais automáticos fundo a fundo
+• Define regras de suspensão e bloqueio por inadimplência`,
+tags:['FNAS','Partilha','Recursos','Cofinanciamento','IDH','Inadimplência'],
+link:'https://fnas.mds.gov.br',tema:'gestao-financiamento'},
+
+{id:78,o:'fnas',tipo:'Resolução FNAS',ano:2019,n:false,rev:false,
+num:'Resolução FNAS nº 03/2019',tit:'Prestação de Contas dos Recursos do FNAS',
+ementa:'Dispõe sobre os procedimentos de prestação de contas dos recursos transferidos pelo FNAS.',
+disp:`• Define prazos e documentos exigidos na prestação de contas
+• Regulamenta a análise pelo FNAS e aprovação pelo conselho de AS
+• Atualizada pela Portaria MDS nº 1.043/2024 que migrou a PC para o AgilizaSUAS`,
+tags:['FNAS','Prestação de Contas','Controle','Transparência','Inadimplência'],
+link:'https://fnas.mds.gov.br',tema:'gestao-financiamento'},
+
+{id:79,o:'fnas',tipo:'Resolução FNAS',ano:2020,n:false,rev:false,
+num:'Resolução FNAS nº 02/2020',tit:'Elegibilidade para Recebimento de Recursos Federais',
+ementa:'Define as condições obrigatórias para recebimento de recursos do FNAS.',
+disp:`CONDIÇÕES OBRIGATÓRIAS:
+• Conselho de Assistência Social paritário instalado e em funcionamento
+• Plano Municipal/Estadual de AS aprovado pelo conselho
+• Fundo Municipal/Estadual de AS criado por lei específica
+• Gestor da Assistência Social formalmente designado`,
+tags:['FNAS','Habilitação','Elegibilidade','Fundo Municipal','Plano','Conselho'],
+link:'https://fnas.mds.gov.br',tema:'gestao-financiamento'},
+];
+
+// ═══════════════════════════════════════════════
+// DADOS — LEGISLAÇÃO ESTADUAL — CEARÁ
+// ═══════════════════════════════════════════════
+const CELEG=[
+// ──── LEIS ESTADUAIS ────
+{id:201,o:'spsce',tipo:'Lei Estadual CE',ano:2003,n:false,rev:false,
+num:'Lei CE nº 13.077/2003',tit:'Política Estadual de Assistência Social — PEAS/CE',
+ementa:'Institui a Política Estadual de Assistência Social do Ceará, definindo princípios, diretrizes e estrutura organizacional alinhada à LOAS.',
+disp:`• Estabelece os princípios da Assistência Social no âmbito estadual
+• Define a estrutura organizacional do SUAS no Ceará
+• Regulamenta a gestão estadual, com papel da SPS-CE como órgão gestor
+• Estabelece o CEAS/CE como instância de controle social estadual
+• Define o Fundo Estadual de Assistência Social (FEAS/CE)`,
+tags:['PEAS','Ceará','Política Estadual','Assistência Social','SPS-CE','CEAS'],
+link:'https://www.al.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:202,o:'spsce',tipo:'Lei Estadual CE',ano:2001,n:false,rev:false,
+num:'Lei CE nº 12.796/2001',tit:'Fundo Estadual de Assistência Social — FEAS/CE',
+ementa:'Cria o Fundo Estadual de Assistência Social do Ceará (FEAS/CE) como instrumento de captação e aplicação de recursos.',
+disp:`• Cria o FEAS/CE como instrumento de financiamento da política estadual de AS
+• Define as fontes de receita do FEAS/CE
+• Regulamenta a gestão e aplicação dos recursos
+• Estabelece o controle social pelo CEAS/CE`,
+tags:['FEAS','Ceará','Fundo Estadual','Financiamento','Recursos','CEAS'],
+link:'https://www.al.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:203,o:'spsce',tipo:'Lei Estadual CE',ano:2007,n:false,rev:false,
+num:'Lei CE nº 13.875/2007',tit:'Criação da SPS-CE — Secretaria da Proteção Social',
+ementa:'Cria a Secretaria da Proteção Social do Ceará (SPS-CE) como órgão estadual gestor da Assistência Social e das políticas sociais integradas.',
+disp:`• Cria a SPS-CE como secretaria especializada em proteção social
+• Define estrutura organizacional e competências da SPS-CE
+• Estabelece a articulação com outros órgãos do Governo do Estado
+• Regulamenta a gestão estadual do SUAS no Ceará`,
+tags:['SPS-CE','Ceará','Criação','Secretaria','Proteção Social'],
+link:'https://www.al.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:204,o:'spsce',tipo:'Lei Estadual CE',ano:2011,n:false,rev:false,
+num:'Lei CE nº 14.731/2011',tit:'Proteção ao Idoso no Ceará',
+ementa:'Dispõe sobre a proteção ao idoso no âmbito do estado do Ceará, complementando o Estatuto do Idoso no contexto das políticas estaduais.',
+disp:`• Regulamenta o atendimento ao idoso nos serviços socioassistenciais estaduais
+• Define obrigações do Estado na política de cuidados a idosos
+• Trata das ILPIs estaduais e do Programa de Atenção ao Idoso
+• Integra com o SUAS e a rede de saúde estadual`,
+tags:['Idoso','Ceará','Proteção','ILPI','SUAS','Cuidados'],
+link:'https://www.al.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:205,o:'spsce',tipo:'Lei Estadual CE',ano:2012,n:false,rev:false,
+num:'Lei CE nº 14.861/2012',tit:'Proteção à PcD no Ceará',
+ementa:'Dispõe sobre a proteção e inclusão da pessoa com deficiência no âmbito do estado do Ceará.',
+disp:`• Regulamenta a política estadual de inclusão e proteção à PcD
+• Define serviços assistenciais específicos para PcD no SUAS estadual
+• Trata das Residências Inclusivas e serviços de acolhimento estaduais
+• Integra com a LBI (Lei nº 13.146/2015)`,
+tags:['PcD','Ceará','Deficiência','Inclusão','Residência Inclusiva','SUAS'],
+link:'https://www.al.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:206,o:'spsce',tipo:'Lei Estadual CE',ano:2014,n:false,rev:false,
+num:'Lei CE nº 15.727/2014',tit:'Programa Mais Infância Ceará',
+ementa:'Institui o Programa Mais Infância Ceará para o desenvolvimento integral de crianças de 0 a 5 anos 11 meses em situação de vulnerabilidade.',
+disp:`• Cria o Programa Mais Infância como estratégia estadual de proteção à primeira infância
+• Define visitadores como agentes de visita domiciliar às famílias
+• Integra com o PAIF, Bolsa Família e serviços de saúde e educação
+• Regulamentado pelo Decreto CE nº 31.760/2015`,
+tags:['Mais Infância','Ceará','Primeira Infância','Visitadores','Desenvolvimento','PBF'],
+link:'https://www.al.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:207,o:'spsce',tipo:'Lei Estadual CE',ano:2016,n:false,rev:false,
+num:'Lei CE nº 16.138/2016',tit:'Combate ao Trabalho Infantil — SETICE',
+ementa:'Institui o Sistema Estadual de Combate ao Trabalho Infantil no Ceará (SETICE), integrando a rede socioassistencial.',
+disp:`• Cria o SETICE como sistema estadual de combate ao trabalho infantil
+• Define papéis do CRAS, CREAS, Conselho Tutelar e outros atores
+• Regulamenta o acesso às transferências de renda para famílias com crianças em trabalho infantil
+• Integra com o PETI (Programa de Erradicação do Trabalho Infantil)`,
+tags:['Trabalho Infantil','Ceará','SETICE','PETI','CREAS','Conselho Tutelar'],
+link:'https://www.al.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:208,o:'spsce',tipo:'Lei Estadual CE',ano:2019,n:false,rev:false,
+num:'Lei CE nº 17.058/2019',tit:'Proteção à Mulher em Situação de Violência — SUAS/CE',
+ementa:'Dispõe sobre medidas estaduais de proteção à mulher em situação de violência, com interface com o SUAS no Ceará.',
+disp:`• Regulamenta serviços estaduais de atendimento a mulheres em situação de violência
+• Define o papel do CREAS na articulação da rede de proteção
+• Trata da Casa da Mulher Brasileira e das Casas de Acolhimento no Ceará
+• Integra com a Lei Maria da Penha e a rede intersetorial`,
+tags:['Mulher','Violência','Ceará','CREAS','Proteção','Acolhimento'],
+link:'https://www.al.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:209,o:'spsce',tipo:'Lei Estadual CE',ano:2020,n:false,rev:false,
+num:'Lei CE nº 17.481/2020',tit:'PEPSR/CE — Política Estadual para a Pop. em Situação de Rua',
+ementa:'Institui a Política Estadual para a População em Situação de Rua do Ceará (PEPSR/CE).',
+disp:`• Cria a PEPSR/CE com diretrizes para atendimento à população em situação de rua
+• Define os serviços da rede socioassistencial para este público
+• Regulamenta centros de referência, albergues e serviços de abordagem
+• Integra com a Política Nacional (Decreto Federal nº 7.053/2009)`,
+tags:['Situação de Rua','Ceará','PEPSR','Albergue','Abordagem Social','SUAS'],
+link:'https://www.al.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:210,o:'spsce',tipo:'Lei Estadual CE',ano:2021,n:false,rev:false,
+num:'Lei CE nº 17.754/2021',tit:'Programa Ceará Acolhedor',
+ementa:'Institui o Programa Ceará Acolhedor, que qualifica e expande os serviços de acolhimento institucional no âmbito do SUAS/CE.',
+disp:`• Cria o Programa Ceará Acolhedor como estratégia de qualificação da alta complexidade
+• Define padrões estaduais para acolhimento em consonância com a Tipificação Nacional
+• Regulamenta o cofinanciamento estadual das unidades de acolhimento municipais e estaduais
+• Estabelece o PIA como obrigatório em todas as unidades cofinanciadas`,
+tags:['Acolhimento Institucional','Ceará Acolhedor','Alta Complexidade','PIA','SPS-CE'],
+link:'https://www.al.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:211,o:'spsce',tipo:'Lei Estadual CE',ano:2023,n:false,rev:false,
+num:'Lei CE nº 18.132/2023',tit:'Programa Ceará Sem Fome',
+ementa:'Institui o Programa Ceará Sem Fome, integrado à política de assistência social e segurança alimentar.',
+disp:`• Cria o Programa Ceará Sem Fome como estratégia estadual de enfrentamento à fome
+• Define as populações prioritárias: inscritas no CadÚnico, indígenas, quilombolas, famílias rurais
+• Articula SPS-CE, Secretaria da Agricultura e outros órgãos estaduais
+• Interface com o Programa Bolsa Família e o SUAS`,
+tags:['Ceará Sem Fome','Fome','Segurança Alimentar','CadÚnico','Vulnerabilidade','SPS-CE'],
+link:'https://www.al.ce.gov.br',tema:'legislacao-ceara'},
+
+// ──── DECRETOS ESTADUAIS ────
+{id:212,o:'spsce',tipo:'Decreto Estadual CE',ano:2012,n:false,rev:false,
+num:'Decreto CE nº 30.774/2012',tit:'Regulamentação do SUAS no Ceará',
+ementa:'Regulamenta a operacionalização do SUAS no âmbito do estado do Ceará, definindo competências da SPS-CE e dos municípios.',
+disp:`• Define as responsabilidades da SPS-CE na gestão estadual do SUAS
+• Regulamenta o cofinanciamento estadual dos serviços socioassistenciais municipais
+• Estabelece os instrumentos de gestão: Plano Estadual de AS, SUAS WEB estadual
+• Define a articulação com a CIB/CE (Comissão Intergestores Bipartite)`,
+tags:['SUAS','Ceará','Regulamentação','SPS-CE','CIB','Cofinanciamento'],
+link:'https://www.sps.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:213,o:'spsce',tipo:'Decreto Estadual CE',ano:2015,n:false,rev:false,
+num:'Decreto CE nº 31.760/2015',tit:'Regulamentação do Programa Mais Infância',
+ementa:'Regulamenta o Programa Mais Infância Ceará, definindo as diretrizes operacionais para visitadores e coordenadores.',
+disp:`• Define o perfil e as atribuições dos visitadores do Programa Mais Infância
+• Regulamenta as visitas domiciliares: periodicidade, conteúdo e registro
+• Estabelece o papel dos supervisores e coordenadores
+• Define a integração com os serviços de saúde, educação e SUAS`,
+tags:['Mais Infância','Ceará','Visitadores','Supervisores','Primeira Infância'],
+link:'https://www.sps.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:214,o:'spsce',tipo:'Decreto Estadual CE',ano:2018,n:false,rev:false,
+num:'Decreto CE nº 32.672/2018',tit:'CRDS — Coordenadorias Regionais de Desenvolvimento Social',
+ementa:'Institui as Coordenadorias Regionais de Desenvolvimento Social (CRDS) da SPS-CE para capilarização da política estadual.',
+disp:`• Cria as CRDS como estruturas regionais de apoio técnico à gestão municipal do SUAS
+• Define a cobertura territorial de cada CRDS por macrorregiões do Ceará
+• Estabelece as competências das CRDS: apoio, assessoria e supervisão aos municípios
+• Regulamenta as equipes técnicas das CRDS`,
+tags:['CRDS','SPS-CE','Regiões','Apoio Técnico','Municípios','Gestão'],
+link:'https://www.sps.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:215,o:'spsce',tipo:'Decreto Estadual CE',ano:2020,n:false,rev:false,
+num:'Decreto CE nº 33.510/2020',tit:'Medidas Emergenciais COVID-19 — SUAS/CE',
+ementa:'Estabelece medidas de proteção social emergenciais no SUAS do Ceará durante a pandemia de COVID-19.',
+disp:`• Flexibiliza o funcionamento dos serviços socioassistenciais durante a pandemia
+• Orienta sobre atendimento remoto e protocolos sanitários
+• Regulamenta o uso de recursos estaduais do FEAS/CE para ações emergenciais
+• Define prioridades de atendimento às populações em alta vulnerabilidade`,
+tags:['COVID-19','Emergência','Pandemia','SUAS/CE','Proteção Social','SPS-CE'],
+link:'https://www.sps.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:216,o:'spsce',tipo:'Decreto Estadual CE',ano:2023,n:false,rev:false,
+num:'Decreto CE nº 35.612/2023',tit:'Reestruturação Orgânica da SPS-CE',
+ementa:'Dispõe sobre a reestruturação orgânica da Secretaria da Proteção Social do Ceará, adequando sua estrutura às novas demandas.',
+disp:`• Reorganiza as coordenadorias e diretorias internas da SPS-CE
+• Cria novas unidades administrativas para Política de Cuidados e Vigilância Socioassistencial
+• Define novos fluxos de trabalho entre SPS-CE, CEAS/CE e municípios
+• Adequa a estrutura ao Plano Estadual 2024–2027`,
+tags:['SPS-CE','Reestruturação','Organograma','Cuidados','Vigilância Socioassistencial'],
+link:'https://www.sps.ce.gov.br',tema:'legislacao-ceara'},
+
+// ──── RESOLUÇÕES CEAS/CE ────
+{id:217,o:'spsce',tipo:'Resolução CEAS/CE',ano:2018,n:false,rev:false,
+num:'Resolução CEAS/CE nº 03/2018',tit:'Inscrição de Entidades e Organizações de AS no Ceará',
+ementa:'Regulamenta os critérios e procedimentos para inscrição de entidades e organizações de Assistência Social no CEAS/CE.',
+disp:`• Define critérios para inscrição de entidades de atendimento, assessoramento e defesa de direitos
+• Regulamenta o prazo de validade da inscrição e as condições de renovação
+• Estabelece o papel do CEAS/CE na supervisão das entidades inscritas
+• Integra com as Resoluções CNAS nº 11/2015 e 151/2024`,
+tags:['CEAS/CE','Entidades','Inscrição','OSC','Controle Social','Ceará'],
+link:'https://www.sps.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:218,o:'spsce',tipo:'Resolução CEAS/CE',ano:2019,n:false,rev:false,
+num:'Resolução CEAS/CE nº 01/2019',tit:'Regulamento Interno do CEAS/CE',
+ementa:'Aprova o Regulamento Interno do Conselho Estadual de Assistência Social do Ceará (CEAS/CE).',
+disp:`• Define a composição, funcionamento e deliberações do CEAS/CE
+• Regulamenta a periodicidade e o quórum mínimo das reuniões ordinárias e extraordinárias
+• Estabelece as comissões temáticas permanentes do CEAS/CE
+• Define os procedimentos de eleição da mesa diretora`,
+tags:['CEAS/CE','Regulamento Interno','Controle Social','Composição','Ceará'],
+link:'https://www.sps.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:219,o:'spsce',tipo:'Resolução CEAS/CE',ano:2020,n:false,rev:false,
+num:'Resolução CEAS/CE nº 05/2020',tit:'Plano Estadual de Assistência Social 2020–2023',
+ementa:'Aprova o Plano Estadual de Assistência Social do Ceará para o período 2020–2023.',
+disp:`• Define metas e prioridades da política estadual de AS para o quadriênio
+• Regulamenta o cofinanciamento estadual dos serviços socioassistenciais municipais
+• Estabelece indicadores de monitoramento e avaliação
+• Base para os Pactos de Aprimoramento do SUAS estaduais`,
+tags:['Plano Estadual','Ceará','2020-2023','Metas','Cofinanciamento','SUAS'],
+link:'https://www.sps.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:220,o:'spsce',tipo:'Resolução CEAS/CE',ano:2021,n:false,rev:false,
+num:'Resolução CEAS/CE nº 02/2021',tit:'Benefícios Eventuais no Ceará',
+ementa:'Estabelece parâmetros estaduais para a concessão de benefícios eventuais pelos municípios cearenses.',
+disp:`• Orienta os municípios cearenses sobre a regulamentação local dos benefícios eventuais
+• Define as situações que geram direito ao benefício eventual no Ceará
+• Regula o cofinanciamento estadual dos benefícios eventuais
+• Atualizada pela Resolução CNAS nº 213/2025`,
+tags:['Benefícios Eventuais','Ceará','Municípios','Cofinanciamento','CEAS'],
+link:'https://www.sps.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:221,o:'spsce',tipo:'Resolução CEAS/CE',ano:2023,n:false,rev:false,
+num:'Resolução CEAS/CE nº 04/2023',tit:'Cofinanciamento FEAS/CE 2024',
+ementa:'Estabelece os critérios e percentuais do cofinanciamento estadual via FEAS/CE para o exercício de 2024.',
+disp:`• Define os critérios de partilha dos recursos do FEAS/CE entre os municípios cearenses
+• Regulamenta os serviços cofinanciados pelo estado: SCFV, PAIF, PAEFI e alta complexidade
+• Estabelece as contrapartidas municipais exigidas
+• Fixa prazo para adesão ao cofinanciamento`,
+tags:['FEAS/CE','Cofinanciamento','Ceará','2024','Municípios','Serviços'],
+link:'https://www.sps.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:222,o:'spsce',tipo:'Resolução CEAS/CE',ano:2024,n:false,rev:false,
+num:'Resolução CEAS/CE nº 03/2024',tit:'Plano Estadual de Assistência Social 2024–2027',
+ementa:'Aprova o Plano Estadual de Assistência Social do Ceará para o período 2024–2027.',
+disp:`• Define prioridades estratégicas para o quadriênio: Política de Cuidados, Ceará Acolhedor, Mais Infância
+• Regulamenta as metas de expansão dos serviços de proteção básica e especial
+• Define indicadores de monitoramento vinculados ao SUAS WEB
+• Integra com o Plano Plurianual estadual (PPA 2024–2027)`,
+tags:['Plano Estadual','Ceará','2024-2027','Metas','Cuidados','Vigilância'],
+link:'https://www.sps.ce.gov.br',tema:'legislacao-ceara'},
+
+// ──── RESOLUÇÕES CIB/CE ────
+{id:223,o:'spsce',tipo:'Resolução CIB/CE',ano:2022,n:false,rev:false,
+num:'Resolução CIB/CE nº 02/2022',tit:'Fluxos de Referência e Contrarreferência no SUAS/CE',
+ementa:'Estabelece os fluxos de referência e contrarreferência entre os equipamentos do SUAS no Ceará.',
+disp:`• Define os fluxos de encaminhamento entre CRAS, CREAS e serviços de alta complexidade
+• Regulamenta a articulação intersetorial com saúde, educação e sistema de justiça
+• Estabelece os instrumentos de comunicação entre equipamentos (fichas de referência)
+• Integra com as equipes técnicas das CRDS`,
+tags:['Referência','Contrarreferência','SUAS/CE','CRAS','CREAS','Fluxo'],
+link:'https://www.sps.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:224,o:'spsce',tipo:'Resolução CIB/CE',ano:2023,n:false,rev:false,
+num:'Resolução CIB/CE nº 05/2023',tit:'Pacto de Aprimoramento do SUAS/CE 2022–2025',
+ementa:'Regulamenta o Pacto de Aprimoramento do SUAS entre o estado e os municípios cearenses para o período 2022–2025.',
+disp:`• Define as metas do Pacto de Aprimoramento por porte municipal
+• Estabelece indicadores de acompanhamento por eixo: proteção básica, especial, gestão
+• Define as responsabilidades da SPS-CE no apoio técnico e financeiro aos municípios
+• Alinha com o Pacto Nacional e o Plano Estadual 2024–2027`,
+tags:['Pacto de Aprimoramento','CIB/CE','SUAS','2022-2025','Metas','Municípios'],
+link:'https://www.sps.ce.gov.br',tema:'legislacao-ceara'},
+
+{id:225,o:'spsce',tipo:'Resolução CIB/CE',ano:2024,n:false,rev:false,
+num:'Resolução CIB/CE nº 03/2024',tit:'Regionalização da Alta Complexidade no Ceará',
+ementa:'Define os parâmetros de regionalização dos serviços de Alta Complexidade do SUAS no Ceará.',
+disp:`• Estabelece polos regionais de referência em Alta Complexidade por macrorregião
+• Define o papel da SPS-CE no cofinanciamento dos serviços regionais
+• Regulamenta os fluxos de acesso dos municípios aos serviços regionalizados
+• Integra com o Plano Estadual 2024–2027 e o Programa Ceará Acolhedor`,
+tags:['Alta Complexidade','Regionalização','Ceará','Polos Regionais','CREAS','Acolhimento'],
+link:'https://www.sps.ce.gov.br',tema:'legislacao-ceara'},
+];
+
+// ═══════════════════════════════════════════════
+// DADOS — BIBLIOTECA FNAS
+// ═══════════════════════════════════════════════
+const FNAS_ITEMS=[
+// MANUAIS E GUIAS PRINCIPAIS
+{cat:'Manuais e Guias',icon:'📘',tipo:'Manual',
+tit:'Manual AgilizaSUAS — Para Conselheiros',
+desc:'Guia prático para os conselheiros de assistência social sobre o uso do AgilizaSUAS na prestação de contas.',
+ano:2026,link:'https://fnas.mds.gov.br/wp-content/uploads/2026/03/Manual-AgilizaSUAS-Conselho-1-versao-final-2-CORRETA-1.pdf',destaque:true},
+
+{cat:'Manuais e Guias',icon:'📘',tipo:'Manual',
+tit:'Manual AgilizaSUAS — Para Gestores e Técnicos',
+desc:'Manual operacional do AgilizaSUAS para gestores e técnicos municipais e estaduais responsáveis pela prestação de contas.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/02/Manual-AgilizaSUAS-1.pdf',destaque:true},
+
+{cat:'Manuais e Guias',icon:'📗',tipo:'Guia Prático',
+tit:'Portaria MDS nº 1.043/2024 Comentada',
+desc:'Versão comentada e anotada da Portaria MDS nº 1.043/2024 que regulamenta o cofinanciamento federal do SUAS fundo a fundo.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2026/02/Portaria-1.043-2024-Comentada-DIAGRAMACAO_ajustado-v3-1.pdf',destaque:true},
+
+{cat:'Manuais e Guias',icon:'📗',tipo:'Guia Prático',
+tit:'Portaria MDS nº 1.044/2024 Anotada',
+desc:'Versão anotada da Portaria MDS nº 1.044/2024 sobre transferências fundo a fundo da Ação Orçamentária 219G.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/05/PORTARIA-MDS-No-1044-ANOTADA_v.-DIAGRAMACAO-07.05.pdf',destaque:true},
+
+{cat:'Manuais e Guias',icon:'📗',tipo:'Guia Prático',
+tit:'Guia de Emendas Parlamentares MDS 2026',
+desc:'Versão completa do Guia de Emendas Parlamentares do MDS para o exercício de 2026.',
+ano:2026,link:'https://mds.gov.br/webarquivos/MDS/1_Acesso_a_Informacao/Emendas_Parlamentares/Guia_de_Emendas/2026/2026_Versao_Completa.pdf',destaque:false},
+
+{cat:'Manuais e Guias',icon:'📗',tipo:'Guia Prático',
+tit:'Guia de Emendas Parlamentares MDS 2025',
+desc:'Versão completa do Guia de Emendas Parlamentares do MDS para o exercício de 2025.',
+ano:2025,link:'https://mds.gov.br/webarquivos/MDS/1_Acesso_a_Informacao/Emendas_Parlamentares/Guia_de_Emendas/2025/2025_Versao_Completa.pdf',destaque:false},
+
+{cat:'Manuais e Guias',icon:'📗',tipo:'Guia Prático',
+tit:'Manual de Orientações de Projetos Arquitetônicos (CRAS/CREAS)',
+desc:'Orientações técnicas e arquitetônicas para projetos de construção e reforma de unidades do SUAS.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/06/MANUAL-DE-ORIENTACOES-DE-PROJETOS-ARQUITETONICOS.pdf',destaque:false},
+
+{cat:'Manuais e Guias',icon:'📙',tipo:'Cartilha',
+tit:'Cartilha SNAS — Ações 2023–2025',
+desc:'Cartilha informativa da SNAS apresentando as principais ações e resultados da Assistência Social no período 2023–2025.',
+ano:2026,link:'https://fnas.mds.gov.br/wp-content/uploads/2026/02/CARTILHA-SNAS-ACOES-2023-2025.pdf',destaque:false},
+
+{cat:'Manuais e Guias',icon:'📙',tipo:'Cartilha',
+tit:'Cartilha — Canais de Comunicação do FNAS',
+desc:'Guia sobre os canais oficiais de comunicação do FNAS para acesso de gestores e conselheiros.',
+ano:2024,link:'https://fnas.mds.gov.br/wp-content/uploads/2024/10/CARTILHA-CANAIS-DE-COMUNICACAO-1.pdf',destaque:false},
+
+// EstruturaSUAS
+{cat:'EstruturaSUAS — Ação 219G',icon:'🏗️',tipo:'Guia do Sistema',
+tit:'Guia Prático EstruturaSUAS — Para Gestores',
+desc:'Manual prático para gestores municipais e estaduais sobre o uso do sistema EstruturaSUAS para programação da Ação Orçamentária 219G.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/05/GUIA-PRATICO-ESTRUTURASUAS_GESTOR.docx-1.pdf',destaque:true},
+
+{cat:'EstruturaSUAS — Ação 219G',icon:'🏗️',tipo:'Guia do Sistema',
+tit:'Guia Prático EstruturaSUAS — Para Parlamentares',
+desc:'Guia prático sobre o uso do sistema EstruturaSUAS para acompanhamento de emendas parlamentares.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/05/GUIA-PRATICO-ESTRUTURASUAS_PARLAMENTAR.docx-1.pdf',destaque:false},
+
+{cat:'EstruturaSUAS — Ação 219G',icon:'🏗️',tipo:'Guia do Sistema',
+tit:'Guia Prático EstruturaSUAS — Para Conselheiros',
+desc:'Manual para conselheiros de assistência social sobre o acompanhamento das programações no EstruturaSUAS.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/06/GUIA-PRATICO-ESTRUTURASUAS_CONSELHO_FINAL.pdf',destaque:false},
+
+{cat:'EstruturaSUAS — Ação 219G',icon:'🏗️',tipo:'Tutorial',
+tit:'Tutorial — Acessando o EstruturaSUAS (Passo a Passo)',
+desc:'Guia passo a passo para acesso e operação inicial do sistema EstruturaSUAS.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/06/ACESSANDO-o-EstruturaSUAS.pdf',destaque:false},
+
+// Fundos de Assistência Social
+{cat:'Fundos de Assistência Social',icon:'💰',tipo:'Guia',
+tit:'Guia de Orientações — Fundos de Assistência Social',
+desc:'Guia para gestores municipais e estaduais sobre a organização, funcionamento e gestão dos Fundos de Assistência Social.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/08/Fundos-de-Assistencia-Social.pdf',destaque:true},
+
+{cat:'Fundos de Assistência Social',icon:'💰',tipo:'Guia',
+tit:'Guia Prático sobre Orçamento Público para Conselhos de AS',
+desc:'Guia orientador para conselheiros de assistência social sobre orçamento público, LOA, QDD e Função Orçamentária 08.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/04/GUIA-PRATICO-ORCAMENTO-PUBLICO-DIAGRAMACAO.pdf',destaque:true},
+
+{cat:'Fundos de Assistência Social',icon:'💰',tipo:'Guia',
+tit:'Guia — Descomplicando LOA, QDD e Função Orçamentária 08',
+desc:'Material de apoio unificado com orientações práticas para elaboração da proposta orçamentária para 2026.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/07/Guia-Descomplicando-LOA-QDD-e-FO-08-1.pdf',destaque:false},
+
+{cat:'Fundos de Assistência Social',icon:'💰',tipo:'Guia',
+tit:'Orientações — LOA 2024 para Assistência Social',
+desc:'Orientações para elaboração do Projeto de Lei Orçamentária Anual de 2024 com foco na Assistência Social.',
+ano:2024,link:'https://fnas.mds.gov.br/elaboracao-do-projeto-de-lei-orcamentaria-anual-2024/',destaque:false},
+
+// Prestação de Contas e AgilizaSUAS
+{cat:'Prestação de Contas — AgilizaSUAS',icon:'📊',tipo:'FAQ',
+tit:'FAQ — Apoio Técnico sobre Execução dos Recursos do SUAS',
+desc:'Perguntas e respostas frequentes sobre a execução dos recursos do SUAS, AgilizaSUAS e prestação de contas.',
+ano:2024,link:'https://fnas.mds.gov.br/wp-content/uploads/2024/11/FAQ-Apoio-tecnico-1.pdf',destaque:false},
+
+{cat:'Prestação de Contas — AgilizaSUAS',icon:'📊',tipo:'Manual de Transição',
+tit:'Manual de Transição — BB Gestão Ágil para AgilizaSUAS',
+desc:'Orientações sobre a transição do sistema BB Gestão Ágil para o AgilizaSUAS, incluindo prazos e procedimentos.',
+ano:2024,link:'https://fnas.mds.gov.br/wp-content/uploads/2024/11/Manual-de-Transicao-1.pdf',destaque:true},
+
+{cat:'Prestação de Contas — AgilizaSUAS',icon:'📊',tipo:'Caderno',
+tit:'Caderno de Apoio Técnico Integrado — Execução dos Recursos do SUAS',
+desc:'Caderno técnico integrado com orientações sobre a execução, prestação de contas e controle dos recursos do SUAS.',
+ano:2024,link:'https://fnas.mds.gov.br/caderno-de-apoio-tecnico-integrado-sobre-execucao-dos-recursos-do-suas/',destaque:false},
+
+// Recursos Específicos
+{cat:'Recursos Específicos e Emergências',icon:'🚨',tipo:'Guia',
+tit:'PROFORT-SUAS Rio Doce — Guia de Orientações',
+desc:'Guia de orientações para municípios atingidos pelo rompimento da Barragem de Fundão (Rio Doce) sobre aplicação dos recursos do PROFORT-SUAS.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/09/PROFORT-SUAS-Rio-Doce.docx.pdf',destaque:false},
+
+{cat:'Recursos Específicos e Emergências',icon:'🚨',tipo:'Guia',
+tit:'Guia — Orientações sobre MP nº 1.218/2024 (Rio Grande do Sul)',
+desc:'Orientações para municípios do Rio Grande do Sul sobre o uso dos recursos da Medida Provisória nº 1.218/2024 para reconstrução do SUAS.',
+ano:2024,link:'https://fnas.mds.gov.br/guia-de-orientacoes-pleitos-de-prospeccao-para-reconstrucao-do-suas-no-rio-grande-do-sul/',destaque:false},
+
+{cat:'Recursos Específicos e Emergências',icon:'🚨',tipo:'Guia',
+tit:'Guia — Orientações sobre MP nº 1.188/2023',
+desc:'Orientações técnicas sobre os recursos da Medida Provisória nº 1.188/2023 destinados ao SUAS.',
+ano:2024,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/09/Orientacoes-sobre-os-recursos-da-MP-no-1188-2023.pdf',destaque:false},
+
+{cat:'Recursos Específicos e Emergências',icon:'🚨',tipo:'Guia',
+tit:'Guia — Orientações sobre Portaria MC nº 580/2020 (Ação 219G — Versão histórica)',
+desc:'Guia sobre os recursos da Portaria MC nº 580/2020, que regulamentou a Ação 219G antes de ser revogada pela Portaria MDS nº 1.044/2024.',
+ano:2022,link:'https://fnas.mds.gov.br/wp-content/uploads/2022/07/GUIA_PORTARIA_MC_580_2020_V_JUNHO_2022.pdf',destaque:false},
+
+{cat:'Recursos Específicos e Emergências',icon:'🚨',tipo:'Guia',
+tit:'Guia — Orientações sobre Portaria MDS nº 886/2023',
+desc:'Orientações técnicas sobre os recursos da Portaria MDS nº 886/2023 para o SUAS.',
+ano:2023,link:'https://fnas.mds.gov.br/wp-content/uploads/2023/12/Orientacoes-sobre-os-recursos-da-Port.-886-2023_vf.pdf',destaque:false},
+
+// Yanomami / Povos Tradicionais
+{cat:'Populações Específicas',icon:'🌿',tipo:'Guia',
+tit:'Guia — SUAS para Comunidades Yanomami e Ye\'kwana',
+desc:'Guia de orientações para execução dos recursos do SUAS em áreas dos povos Yanomami e Ye\'kwana, com orientações sobre cadastramento e atendimento.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/07/GUIA-YANOMAMI-FINAL.pdf',destaque:false},
+
+// Estudos Técnicos
+{cat:'Estudos e Pesquisas',icon:'🔬',tipo:'Estudo Técnico',
+tit:'Estudo UNICEF — Sumário Executivo: Crianças e SUAS',
+desc:'Estudo técnico em parceria com o UNICEF sobre o alcance do SUAS na proteção de crianças e adolescentes.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/10/ESTUDO-2-UNICEF_Sumario-Final-20out25.pdf',destaque:false},
+
+// Identidade Visual e Infraestrutura
+{cat:'Identidade Visual e Infraestrutura',icon:'🎨',tipo:'Manual Visual',
+tit:'Critérios para Obtenção do Selo FNAS',
+desc:'Critérios e procedimentos para que os equipamentos do SUAS obtenham o Selo FNAS de qualidade e conformidade.',
+ano:2025,link:'https://fnas.mds.gov.br/wp-content/uploads/2025/09/CRITERIOS-PARA-OBTENCAO-DO-SELO.pdf',destaque:false},
+];
+
+// ═══════════════════════════════════════════════
+// CORES DOS TIPOS DE NORMA (badges)
+// ═══════════════════════════════════════════════
+const BSTYLE={
+  lei:{bg:'#d1fae5',cor:'#065f46'},
+  cnas:{bg:'#dbeafe',cor:'#1e40af'},
+  mds:{bg:'#ede9fe',cor:'#4c1d95'},
+  fnas:{bg:'#fef3c7',cor:'#92400e'},
+  spsce:{bg:'#ffedd5',cor:'#7c2d12'},
+};
+function bdg(o,tipo){
+  const s=BSTYLE[o]||{bg:'#f1f5f9',cor:'#64748b'};
+  return `<span class="bdg" style="background:${s.bg};color:${s.cor}">${ORGAOS[o]?.nome||o.toUpperCase()}</span>
+          <span class="bdg" style="background:#f1f5f9;color:#64748b">${tipo}</span>`;
+}
+
+// ═══════════════════════════════════════════════
+// ESTADO
+// ═══════════════════════════════════════════════
+let state={orgao:'',tema:'',status:'',search:''};
+let modalItem=null;
+
+// ═══════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded',()=>{
+  const all=LEG.length;
+  document.getElementById('stTotal').textContent=all;
+  document.getElementById('stNovo').textContent=LEG.filter(x=>x.n).length;
+  document.getElementById('stRev').textContent=LEG.filter(x=>x.rev).length;
+  document.getElementById('sc-all').textContent=all;
+  document.getElementById('sc-lei').textContent=LEG.filter(x=>x.o==='lei').length;
+  document.getElementById('sc-cnas').textContent=LEG.filter(x=>x.o==='cnas').length;
+  document.getElementById('sc-mds').textContent=LEG.filter(x=>x.o==='mds').length;
+  document.getElementById('sc-fnas').textContent=LEG.filter(x=>x.o==='fnas').length;
+  document.getElementById('sc-spsce').textContent=CELEG.length;
+  document.getElementById('sc-vig').textContent=LEG.filter(x=>!x.rev).length;
+  document.getElementById('sc-rev').textContent=LEG.filter(x=>x.rev).length;
+  document.getElementById('sc-nov').textContent=LEG.filter(x=>x.n).length;
+
+  // Build tema sidebar
+  const sbTema=document.getElementById('sbTema');
+  const allBtn=document.createElement('button');
+  allBtn.className='sb-btn on';allBtn.dataset.f='tema';allBtn.dataset.v='';
+  allBtn.onclick=()=>setF('tema','',allBtn);
+  allBtn.innerHTML=`<span class="sb-ic">🗂️</span><span class="sb-lbl">Todos os temas</span>`;
+  sbTema.appendChild(allBtn);
+  TEMAS.forEach(t=>{
+    const cnt=LEG.filter(x=>x.tema===t.id).length;
+    const b=document.createElement('button');
+    b.className='sb-btn';b.dataset.f='tema';b.dataset.v=t.id;
+    b.onclick=()=>setF('tema',t.id,b);
+    b.innerHTML=`<span class="sb-ic">${t.icon}</span><span class="sb-lbl">${t.nome}</span><span class="sb-cnt">${cnt}</span>`;
+    sbTema.appendChild(b);
+  });
+
+  // Build panels
+  renderOrgao();renderTema();renderFnas();
+  render();
+
+  // Tab switch
+  document.querySelectorAll('.navtab').forEach(t=>{
+    t.onclick=()=>{
+      document.querySelectorAll('.navtab').forEach(x=>x.classList.remove('on'));
+      document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+      t.classList.add('on');
+      document.getElementById('panel-'+t.dataset.t).classList.add('on');
+      if(t.dataset.t==='ceara')renderCeara();
+    };
+  });
+
+  // Search
+  document.getElementById('searchInput').oninput=e=>{
+    state.search=e.target.value.toLowerCase().trim();
+    if(!document.getElementById('panel-todos').classList.contains('on')){
+      document.querySelectorAll('.navtab').forEach(x=>x.classList.remove('on'));
+      document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+      document.querySelector('[data-t="todos"]').classList.add('on');
+      document.getElementById('panel-todos').classList.add('on');
+    }
+    render();
+  };
+
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+});
+
+// ═══════════════════════════════════════════════
+// FILTROS
+// ═══════════════════════════════════════════════
+function setF(type,value,btn){
+  state[type]=value;
+  document.querySelectorAll(`[data-f="${type}"]`).forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderActiveFilters();
+  render();
+}
+function clearF(type){
+  state[type]='';
+  const b=document.querySelector(`[data-f="${type}"][data-v=""]`);
+  if(b){document.querySelectorAll(`[data-f="${type}"]`).forEach(x=>x.classList.remove('on'));b.classList.add('on');}
+  renderActiveFilters();render();
+}
+function renderActiveFilters(){
+  const el=document.getElementById('activeFilters');el.innerHTML='';
+  if(state.orgao){const o=ORGAOS[state.orgao];if(o)el.innerHTML+=`<span class="af-pill">${o.icon} ${o.nome} <button onclick="clearF('orgao')">✕</button></span>`;}
+  if(state.tema){const t=TEMAS.find(x=>x.id===state.tema);if(t)el.innerHTML+=`<span class="af-pill">${t.icon} ${t.nome} <button onclick="clearF('tema')">✕</button></span>`;}
+  if(state.status){const labels={vigente:'✅ Vigentes',revogada:'🚫 Revogadas',novo:'🆕 Novidades'};el.innerHTML+=`<span class="af-pill ${state.status==='revogada'?'rev':''}">${labels[state.status]} <button onclick="clearF('status')">✕</button></span>`;}
+}
+
+// ═══════════════════════════════════════════════
+// RENDER PRINCIPAL
+// ═══════════════════════════════════════════════
+function hl(t,q){if(!q)return t;return t.replace(new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi'),'<mark style="background:#fef08a;color:#1c1c1c;border-radius:2px;padding:0 1px">$1</mark>')}
+
+function render(){
+  let list=[...LEG];
+  if(state.orgao)list=list.filter(x=>x.o===state.orgao);
+  if(state.tema)list=list.filter(x=>x.tema===state.tema);
+  if(state.status==='vigente')list=list.filter(x=>!x.rev);
+  if(state.status==='revogada')list=list.filter(x=>x.rev);
+  if(state.status==='novo')list=list.filter(x=>x.n);
+  if(state.search){
+    const q=state.search;
+    list=list.filter(x=>x.num.toLowerCase().includes(q)||x.tit.toLowerCase().includes(q)||x.ementa.toLowerCase().includes(q)||(x.tags&&x.tags.some(t=>t.toLowerCase().includes(q))));
+  }
+  const sort=document.getElementById('sortSel').value;
+  if(sort==='ano-desc')list.sort((a,b)=>b.ano-a.ano||b.id-a.id);
+  else if(sort==='ano-asc')list.sort((a,b)=>a.ano-b.ano||a.id-b.id);
+  else list.sort((a,b)=>a.num.localeCompare(b.num));
+
+  const q=state.search;
+  document.getElementById('resultLabel').textContent=`${list.length} resultado${list.length!==1?'s':''} encontrado${list.length!==1?'s':''}`;
+  const el=document.getElementById('cardList');el.innerHTML='';
+  if(!list.length){el.innerHTML=`<div class="empty"><div class="empty-icon">🔍</div><div class="empty-title">Nenhum resultado</div><p>Tente outros termos ou remova os filtros.</p></div>`;return;}
+  list.forEach((item,i)=>{
+    const temaObj=TEMAS.find(t=>t.id===item.tema);
+    const os=BSTYLE[item.o]||{bg:'#f1f5f9',cor:'#64748b'};
+    const borda=ORGAOS[item.o]?.borda||'#94a3b8';
+    const tags=(item.tags||[]).slice(0,4).map(t=>`<span class="tag">${hl(t,q)}</span>`).join('');
+    const novoBadge=item.n&&!item.rev?`<span style="font-family:var(--font-m);font-size:.58rem;background:#dcfce7;color:#15803d;border-radius:4px;padding:2px 7px;font-weight:700;position:absolute;top:10px;right:12px">NOVO</span>`:'';
+    const revBadge=item.rev?`<span style="font-family:var(--font-m);font-size:.58rem;background:var(--rose3);color:var(--rose2);border-radius:4px;padding:2px 7px;font-weight:700;position:absolute;top:10px;right:12px">REVOGADA</span>`:'';
+    const revInfo=item.rev&&item.revInfo?`<div class="revogada-info">${item.revInfo}</div>`:'';
+    const d=document.createElement('div');
+    d.className=`card${item.rev?' revogada':''}`;
+    d.style.cssText=`border-left-color:${borda};animation-delay:${i*.018}s`;
+    d.innerHTML=`
+      ${novoBadge}${revBadge}
+      <div class="card-top">
+        <div style="flex:1">
+          <div class="card-meta">${item.tipo} · ${item.ano}</div>
+          <div class="card-num">${hl(item.num,q)}</div>
+          <div class="card-tit">${hl(item.tit,q)}</div>
+        </div>
+        <div class="card-badges">
+          <span class="bdg" style="background:${os.bg};color:${os.cor}">${ORGAOS[item.o]?.nome||item.o}</span>
+          ${temaObj?`<span class="bdg" style="background:${temaObj.bg};color:${temaObj.cor}">${temaObj.icon} ${temaObj.nome}</span>`:''}
+        </div>
+      </div>
+      <p class="card-em">${hl(item.ementa,q)}</p>
+      ${revInfo}
+      <div class="card-foot">
+        <div class="card-tags">${tags}</div>
+        ${item.link?`<a class="card-link" href="${item.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()">↗ Ver</a>`:''}
+      </div>`;
+    d.onclick=()=>openModal(item);
+    el.appendChild(d);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// RENDER CEARÁ
+// ═══════════════════════════════════════════════
+function renderCeara(){
+  const sort=document.getElementById('ceSortSel').value;
+  let list=[...CELEG];
+  if(sort==='ano-desc')list.sort((a,b)=>b.ano-a.ano);
+  else list.sort((a,b)=>a.ano-b.ano);
+  document.getElementById('ceLabel').textContent=`${list.length} normas estaduais — Ceará`;
+  const el=document.getElementById('ceList');el.innerHTML='';
+  list.forEach((item,i)=>{
+    const temaObj=TEMAS.find(t=>t.id===item.tema);
+    const os=BSTYLE[item.o]||{bg:'#ffedd5',cor:'#7c2d12'};
+    const tags=(item.tags||[]).slice(0,4).map(t=>`<span class="tag">${t}</span>`).join('');
+    const revBadge=item.rev?`<span style="font-family:var(--font-m);font-size:.58rem;background:var(--rose3);color:var(--rose2);border-radius:4px;padding:2px 7px;font-weight:700;position:absolute;top:10px;right:12px">REVOGADA</span>`:'';
+    const d=document.createElement('div');
+    d.className=`card${item.rev?' revogada':''}`;
+    d.style.cssText=`border-left-color:#ea580c;animation-delay:${i*.018}s`;
+    d.innerHTML=`
+      ${revBadge}
+      <div class="card-top">
+        <div style="flex:1">
+          <div class="card-meta">${item.tipo} · ${item.ano}</div>
+          <div class="card-num">${item.num}</div>
+          <div class="card-tit">${item.tit}</div>
+        </div>
+        <div class="card-badges">
+          <span class="bdg" style="background:${os.bg};color:${os.cor}">SPS-CE / CEAS-CE</span>
+          ${temaObj?`<span class="bdg" style="background:${temaObj.bg};color:${temaObj.cor}">${temaObj.icon} ${temaObj.nome}</span>`:''}
+        </div>
+      </div>
+      <p class="card-em">${item.ementa}</p>
+      <div class="card-foot">
+        <div class="card-tags">${tags}</div>
+        ${item.link?`<a class="card-link" href="${item.link}" target="_blank" rel="noopener" onclick="event.stopPropagation()">↗ Ver</a>`:''}
+      </div>`;
+    d.onclick=()=>openModal(item);
+    el.appendChild(d);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// RENDER ÓRGÃO
+// ═══════════════════════════════════════════════
+function renderOrgao(){
+  const g=document.getElementById('orgGrid');g.innerHTML='';
+  const orgsList=[
+    {id:'lei',full:'Legislação Federal (LOAS, ECA, Decretos, LBI)'},
+    {id:'cnas',full:'Conselho Nacional de Assistência Social'},
+    {id:'mds',full:'Ministério do Desenvolvimento Social / SNAS'},
+    {id:'fnas',full:'Fundo Nacional de Assistência Social'},
+    {id:'spsce',full:'Secretaria da Proteção Social do Ceará / CEAS-CE'},
+  ];
+  const colors={lei:'#059669',cnas:'#3b82f6',mds:'#7c3aed',fnas:'#d97706',spsce:'#ea580c'};
+  orgsList.forEach(o=>{
+    const og=ORGAOS[o.id];
+    const cnt=o.id==='spsce'?CELEG.length:LEG.filter(x=>x.o===o.id).length;
+    const s=BSTYLE[o.id]||{bg:'#f1f5f9',cor:'#64748b'};
+    const b=document.createElement('div');
+    b.className='panel-card';
+    b.style.borderTopColor=colors[o.id]||'#94a3b8';
+    b.innerHTML=`<span class="pc-icon">${og?.icon||'📋'}</span>
+      <div class="pc-name">${og?.nome||o.id}</div>
+      <div class="pc-full">${o.full}</div>
+      <span class="pc-cnt" style="background:${s.bg};color:${s.cor}">${cnt} normas</span>`;
+    b.onclick=()=>{
+      if(o.id==='spsce'){
+        document.querySelectorAll('.navtab').forEach(x=>x.classList.remove('on'));
+        document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+        document.querySelector('[data-t="ceara"]').classList.add('on');
+        document.getElementById('panel-ceara').classList.add('on');
+        renderCeara();
+      } else {
+        setF('orgao',o.id,document.querySelector(`[data-f="orgao"][data-v="${o.id}"]`));
+        document.querySelectorAll('.navtab').forEach(x=>x.classList.remove('on'));
+        document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+        document.querySelector('[data-t="todos"]').classList.add('on');
+        document.getElementById('panel-todos').classList.add('on');
+      }
+    };
+    g.appendChild(b);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// RENDER TEMA
+// ═══════════════════════════════════════════════
+function renderTema(){
+  const g=document.getElementById('temaGrid');g.innerHTML='';
+  TEMAS.forEach(t=>{
+    const cnt=t.id==='legislacao-ceara'?CELEG.length:LEG.filter(x=>x.tema===t.id).length;
+    const b=document.createElement('div');
+    b.className='panel-card';
+    b.style.borderTopColor=t.cor;
+    b.innerHTML=`<span class="pc-icon">${t.icon}</span>
+      <div class="pc-name">${t.nome}</div>
+      <span class="pc-cnt" style="background:${t.bg};color:${t.cor}">${cnt} normas</span>`;
+    b.onclick=()=>{
+      if(t.id==='legislacao-ceara'){
+        document.querySelectorAll('.navtab').forEach(x=>x.classList.remove('on'));
+        document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+        document.querySelector('[data-t="ceara"]').classList.add('on');
+        document.getElementById('panel-ceara').classList.add('on');
+        renderCeara();
+      } else {
+        setF('tema',t.id,document.querySelector(`[data-f="tema"][data-v="${t.id}"]`)||{classList:{remove:()=>{},add:()=>{}},dataset:{}}  );
+        document.querySelectorAll('.navtab').forEach(x=>x.classList.remove('on'));
+        document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+        document.querySelector('[data-t="todos"]').classList.add('on');
+        document.getElementById('panel-todos').classList.add('on');
+      }
+    };
+    g.appendChild(b);
+  });
+}
+
+// ═══════════════════════════════════════════════
+// RENDER FNAS BIBLIOTECA
+// ═══════════════════════════════════════════════
+function renderFnas(){
+  const el=document.getElementById('fnasContent');
+  const cats=[...new Set(FNAS_ITEMS.map(x=>x.cat))];
+  let html='';
+  cats.forEach(cat=>{
+    const items=FNAS_ITEMS.filter(x=>x.cat===cat);
+    html+=`<div class="fnas-section-title"><span>${items[0].icon}</span>${cat}</div>
+           <div class="fnas-grid">`;
+    items.forEach(item=>{
+      html+=`<a class="fnas-card${item.destaque?' destaque':''}" href="${item.link}" target="_blank" rel="noopener">
+        <div class="fnas-card-type">${item.tipo} · ${item.ano}</div>
+        <div class="fnas-card-title">${item.tit}</div>
+        <div class="fnas-card-desc">${item.desc}</div>
+        <span class="fnas-card-link">↗ Acessar documento</span>
+      </a>`;
+    });
+    html+='</div>';
+  });
+  el.innerHTML=html;
+}
+
+// ═══════════════════════════════════════════════
+// MODAL
+// ═══════════════════════════════════════════════
+function openModal(item){
+  modalItem=item;
+  const os=BSTYLE[item.o]||{bg:'#f1f5f9',cor:'#64748b'};
+  const temaObj=TEMAS.find(t=>t.id===item.tema);
+  document.getElementById('mBdg').innerHTML=`
+    <span class="bdg" style="background:${os.bg};color:${os.cor}">${ORGAOS[item.o]?.nome||item.o}</span>
+    <span class="bdg" style="background:#f1f5f9;color:#64748b">${item.tipo}</span>
+    <span class="bdg" style="background:#f1f5f9;color:#64748b">${item.ano}</span>
+    ${item.n?`<span class="bdg" style="background:#dcfce7;color:#15803d">NOVO</span>`:''}
+    ${item.rev?`<span class="bdg" style="background:var(--rose3);color:var(--rose2)">REVOGADA</span>`:''}
+    ${temaObj?`<span class="bdg" style="background:${temaObj.bg};color:${temaObj.cor}">${temaObj.icon} ${temaObj.nome}</span>`:''}`;
+  document.getElementById('mNum').textContent=item.num;
+  document.getElementById('mTit').textContent=item.tit;
+  document.getElementById('mEm').textContent=item.ementa;
+  document.getElementById('mDi').textContent=item.disp;
+  document.getElementById('mTags').innerHTML=(item.tags||[]).map(t=>`<span class="tag" style="font-size:.72rem">${t}</span>`).join('');
+  const revEl=document.getElementById('mRevInfo');
+  revEl.innerHTML=item.rev&&item.revInfo?`<div class="modal-revogada">⚠️ <strong>Esta norma foi revogada.</strong> ${item.revInfo}</div>`:'';
+  const linkEl=document.getElementById('mLink');
+  if(item.link){linkEl.href=item.link;linkEl.style.display='inline-flex';}else linkEl.style.display='none';
+  document.getElementById('overlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){
+  document.getElementById('overlay').classList.remove('open');
+  document.body.style.overflow='';
+}
+</script>
+</body>
+</html>
